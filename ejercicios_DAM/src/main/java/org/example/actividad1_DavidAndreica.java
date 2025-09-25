@@ -8,6 +8,7 @@ public class actividad1_DavidAndreica {
 
         System.out.println("Introduce tu nombre: ");
         String nombre = read.nextLine(); //nextline es para un texto con espacios
+        System.out.println("Tu nombre tiene " + nombre.length() + " letras");
 
         System.out.println("Introduce tu curso: ");
         String curso = read.next(); //next es para texto sin espacios
