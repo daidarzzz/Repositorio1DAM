@@ -5,23 +5,24 @@ import java.util.Scanner;
 public class ejercicio2 {
     static void main() {
         Scanner read = new Scanner(System.in);
+        final double JORNADA = 40;
         System.out.println("¿Cúantas horas haces a la semana?");
-        int horas = read.nextInt();
+        double horas = read.nextDouble();
 
         System.out.println("¿Cúanto cobras por hora");
         double tarifa = read.nextDouble();
         double salario;
-        if (horas > 40) {
-            int horas_extra = (horas-40);
+        if (horas > JORNADA) {
+            double horas_extra = (horas-JORNADA); //40
             double tarifa_extra = (tarifa * 1.5);
-            salario = (40*tarifa) + (horas_extra*tarifa_extra);
-        }
-        else {
+            salario = (JORNADA*tarifa) + (horas_extra*tarifa_extra);
+            //double salario_extra = (horas_extra * tarifa_extra);
+            //System:out.println("Salario (con extra): " + (salario_extra + JORNADA * tarifa) + "€");
+        } else {
             salario = (horas * tarifa);
         }
 
         System.out.println("Cobras " + salario + "€ brutos a la semana");
-
 
     }
 }

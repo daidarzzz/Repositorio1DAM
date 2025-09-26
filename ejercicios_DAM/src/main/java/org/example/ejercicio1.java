@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class ejercicio1 {
     static void main() {
         Scanner read = new Scanner(System.in);
-        System.out.println("¿Cúantas horas haces a la semana?");
-        int horas = read.nextInt();
+        System.out.println("¿Cuántas horas haces a la semana?");
+        double horas = read.nextDouble();
 
-        System.out.println("¿Cúanto cobras por hora");
-        int tarifa = read.nextInt();
+        System.out.println("¿Cuánto cobras por hora");
+        double tarifa = read.nextDouble();
 
-        int salario = (horas * tarifa);
+        double salario = (horas * tarifa);
 
         System.out.println("Cobras " + salario + " brutos a la semana");
 
