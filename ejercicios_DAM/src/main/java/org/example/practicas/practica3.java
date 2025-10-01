@@ -32,7 +32,8 @@ public class practica3 {
         }
         else if (altura < ALTURA_MINIMA) { //Si la altura es menor que la altura mínima, hacer...
             int cm_restantes = ALTURA_MINIMA - altura; //Declaramos una variable entera para hacer la operación ALTURA MÍNIMA - altura.
-            System.out.println("LO SIENTO, NO PUEDES MONTAR EN LA ATRACCIÓN. Te faltan " + cm_restantes + " cm de altura."); //Te manda un mensaje diciendo que no puedes entrar, y añade el valor de la variable cm_restantes
+            System.out.println("LO SIENTO, NO PUEDES MONTAR EN LA ATRACCIÓN. Te faltan " + cm_restantes + " cm de altura.");
+            //Te manda un mensaje diciendo que no puedes entrar, y añade el valor de la variable cm_restantes
         }
         else { //Lo que se ejecuta si ninguna de las condiciones anteriores se cumple
             //Darle un valor a la variable peso
