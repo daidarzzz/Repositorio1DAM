@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class pasar_string_a_int {
     static void main() {
         Scanner read = new Scanner(System.in);
-        int num = 0;
+        int num;
         //int num2 = 0;
 
         System.out.printf("Introduce el multiplicando (3 cifras): ");
