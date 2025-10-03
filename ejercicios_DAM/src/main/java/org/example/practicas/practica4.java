@@ -48,48 +48,59 @@ public class practica4 {
             tam_mul1 = mul1String.length(); //recoger el tamaño de mul1string
             tam_mul2 = mul2String.length(); //recoger el tamaño de mul1string
 
-            if (mul1 < 0) {
-                negativo1 = true;
+            if (mul1 < 0) { //Si multiplicando es menor de cero...
+                negativo1 = true; //multiplicando será negativo
             }
-            if (mul2 < 0) {
-                negativo2 = true;
-                String mul2num1S = mul2String.substring(1,2);
-                num4 = Integer.parseInt(mul2num1S);
+            if (mul2 < 0) { //si multiplicador es menor de cero...
+                negativo2 = true; //multiplicador será negativo
+                String mul2num1S = mul2String.substring(1,2); //Al ser negativo, empezamos agarrando el segúndo en el índice (saltándonos el símbolo "-")
+                num4 = Integer.parseInt(mul2num1S); //le asignamos a num4 el valor de la primera cifra a la izq de multiplicador
                 String mul2num2S = mul2String.substring(2,3);
-                num5 = Integer.parseInt(mul2num2S);
+                num5 = Integer.parseInt(mul2num2S); //le asignamos a num5 el valor de la segunda cifra a la izq de multiplicador
                 String mul2num3S = mul2String.substring(3,4);
-                num6 = Integer.parseInt(mul2num3S);
+                num6 = Integer.parseInt(mul2num3S); //le asignamos a num6 el valor de la tercera cifra a la izq de multiplicador
             }
-            if (tam_mul1 != 3 && !negativo1 || tam_mul2 != 3 && !negativo2 || tam_mul1 != 4 && negativo1 || tam_mul2 != 4 && negativo2 )
+            if (tam_mul1 != 3 && !negativo1 || tam_mul2 != 3 && !negativo2 || tam_mul1 != 4 && negativo1 || tam_mul2 != 4 && negativo2 ) //Todas las condiciones posibles que hagan que el número de cifras sea incorrecto.
             {
-                System.out.println("ERROR, NÚMERO DE CIFRAS INCORRECTO.");
+                System.out.println("ERROR, NÚMERO DE CIFRAS INCORRECTO."); //mostramos el error y volvería a empezar el bucle.
             }
-            else {
-                bucle = false;
-                if (!negativo2) {
-                String mul2num1S = mul2String.substring(0,1);
-                num4 = Integer.parseInt(mul2num1S);
+            else { //En cualquier otro caso...
+                bucle = false; //El bucle será false, por lo que ya acabará después de esta repetición.
+                if (!negativo2) { //Si multiplicador no es negativo...
+                String mul2num1S = mul2String.substring(0,1); //Empezar a agarrar los números desde el primero en el índice (no hay símbolo "-").
+                num4 = Integer.parseInt(mul2num1S); //Asignamos valores a num4, 5 y 6.
                 String mul2num2S = mul2String.substring(1,2);
                 num5 = Integer.parseInt(mul2num2S);
                 String mul2num3S = mul2String.substring(2,3);
                 num6 = Integer.parseInt(mul2num3S);
                 }
-
             }
         } while (bucle);
 
-        int op1 = (num6 * mul1);
+        int op1 = (num6 * mul1); //Op 1 será la primera operación que salga en la multiplicación, op2 y 3 serán la segunda y tercera
+        String op1s = Integer.toString(op1);
+        int tam_op1 = op1s.length();
+
         int op2 = (num5 * mul1);
         int op3 = (num4 * mul1);
-        resultado = mul1 * mul2;
+        resultado = mul1 * mul2; //El producto
+
+        //Mostrar el resultado de la multiplicación
         System.out.println("El producto de la multiplicación es: ");
         System.out.println("El proceso es: ");
         System.out.println("   "+ mul1);
         System.out.println("x  " + mul2);
         System.out.println("--------");
-        System.out.println("   " + op1);
-        System.out.println(" " + op2 + "x");
-        System.out.println(" " + op3 + "xx");
+        if (tam_op1 == 4) {
+            System.out.println("    " + op1);
+            System.out.println("   " + op2 + "x");
+            System.out.println("  " + op3 + "xx");
+        } else {
+            System.out.println("   " + op1);
+            System.out.println("  " + op2 + "x");
+            System.out.println(" " + op3 + "xx");
+        }
+
         System.out.println("--------");
         System.out.println(" " + resultado);
     }
