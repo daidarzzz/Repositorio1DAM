@@ -39,7 +39,6 @@ public class practica4 {
                 System.out.println("ERROR, FORMATO INCORRECTO."); //Error
                 return;
             }
-
             System.out.println("");
             //Coger los números por separado de cada uno y convertirlos a String
 
