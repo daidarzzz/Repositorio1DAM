@@ -1,6 +1,6 @@
 // Programa Java para ilustrar
 // operadores aritméticos
-package org.example;
+package org.example.TEMA1;
 
 public class Numericos {
     public static void main(String[] args) {

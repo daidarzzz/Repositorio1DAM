@@ -1,4 +1,4 @@
-package org.example.practicas;
+package org.example.TEMA1.practicas;
 
 import java.util.Scanner;
 
