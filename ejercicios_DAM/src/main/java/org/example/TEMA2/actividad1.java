@@ -31,41 +31,46 @@ public class actividad1 {
         }
         if (seguir) {
 
-            if (modo == 1) {
+            switch (modo) {
+                case 1:
+                    System.out.println("Introduce tu año de nacimiento: ");
+                    String anyo_nacimiento = read.next();
 
-                System.out.println("Introduce tu año de nacimiento: ");
-                String anyo_nacimiento = read.next();
+                    try {
+                        anyo_nacimiento_int = Integer.parseInt(anyo_nacimiento);
+                    } catch (NumberFormatException e) {
+                        System.out.println("El formato no es numérico.");
+                        return;
+                    }
+                    if (anyo_nacimiento_int < ANYO_MINIMO) {
+                        System.out.println("La edad es menor a la edad mínima");
+                        return;
+                    }
+                    break;
+                case 2:
+                    System.out.println("Introduce tu edad:");
+                    if (read.hasNextInt()) {
 
-                try {
-                    anyo_nacimiento_int = Integer.parseInt(anyo_nacimiento);
-                } catch (NumberFormatException e) {
-                    System.out.println("El formato no es numérico.");
-                    return;
-                }
+                        edad = read.nextInt();
+                    } else {
+                        System.out.println("La edad no tiene formato correcto (numérico).");
+                        return;
+                    }
 
+                    if (edad >= 0) {
+                        anyo_nacimiento_int  = anyo_actual - edad;
 
-            } else if (modo == 2) {
-                System.out.println("Introduce tu edad:");
-                if (read.hasNextInt()) {
-
-                    edad = read.nextInt();
-                } else {
-                    System.out.println("La edad no tiene formato correcto (numérico).");
-                    return;
-                }
-
-                if (edad >= 0) {
-                    anyo_nacimiento_int  = anyo_actual - edad;
-
-                } else {
-                    System.out.println("La edad no es correcta");
-                }
-
-            } else {
-                System.out.println("El modo introducido no es correcto.");
-                return;
+                    } else {
+                        System.out.println("La edad no es correcta");
+                    }
+                    break;
+                default:
+                    System.out.println("El modo introducido no es correcto.");
+                    break;
             }
+
         }
+
 
         if (anyo_nacimiento_int >= ANYO_MINIMO &&  anyo_nacimiento_int <= anyo_actual) {
 
@@ -84,6 +89,7 @@ public class actividad1 {
             }
 
         }
+
 
 
     }
