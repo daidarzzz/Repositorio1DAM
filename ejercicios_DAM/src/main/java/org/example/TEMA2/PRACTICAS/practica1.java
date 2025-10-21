@@ -9,6 +9,10 @@ public class practica1 {
         int mes_int = 0; //Declaramos el mes como número entero
         int anyo_int = 0; //Declaramos el año como número entero
 
+        System.out.println("******************************");
+        System.out.println("********| PRÁCTICA 1 |********");
+        System.out.println("****************************** \n");
+
         System.out.println("Introduce tu fecha de nacimiento (dd/mm/aaaa): "); //Pregunta al usuario por su fecha de nacimiento
         String fecha = read.nextLine(); //Lee la fecha que introduce el usuario por consola
 
