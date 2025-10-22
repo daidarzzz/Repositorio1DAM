@@ -6,20 +6,23 @@ import java.util.Scanner;
 public class practica2 {
     static void main() {
         Scanner read = new Scanner(System.in); //Escáner para poder leer lo que introduce el usuario en consola
+        //Declaro Los operando y el resultado como double
         double operando1 = 0;
         double operando2 = 0;
-        String operacion = "";
         double resultado = 0;
+        //Declaro la operación realizada como string
+        String operacion = "";
 
+        //Comienza el menú de la calculadora
         System.out.println("**** BIENVENIDO A LA CALCULADORA RÁPIDA ****");
         System.out.println("> Introduce un operando: ");
-        try {
+        try { //Intenta introducir un valor double a operando1
             operando1 = read.nextDouble();
-        } catch (InputMismatchException e) {
-            System.out.println("El formato introducido no es numérico.");
-            return;
+        } catch (InputMismatchException e) { //En caso de que de el siguiente error . . .
+            System.out.println("El formato introducido no es numérico."); //Te suelta un mensaje de error :C
+            return; //Se acaba el programa
         }
-
+        //Continúa el menú
         System.out.println("---------------------------");
         System.out.println("[+] -> Sumar");
         System.out.println("[-] -> Restar");
@@ -28,20 +31,23 @@ public class practica2 {
         System.out.println("[R] -> Raíz cuadrada");
         System.out.println("---------------------------");
         System.out.println("Elige una operación: ");
+        //Pide la operación a realizar
+        operacion = read.next().substring(0); //La operación será el primer carácter que sea escrita por el usuario
+        operacion = operacion.toLowerCase(); //Convierto el carácter en minúscula
 
-        operacion = read.next().substring(0);
-        operacion = operacion.toLowerCase();
-
+        //Si la operación es suma, resta, multiplicación o división . . .
+        //Con esto se logra que si es raíz cuadrada, no se deba introducir el operando2
         if (operacion.equals("+")|| operacion.equals("-") || operacion.equals("x") || operacion.equals("/")) {
-            System.out.println("Introduce el segundo operando:");
-            try {
-                operando2 = read.nextDouble();
-            } catch (InputMismatchException e) {
-                System.out.println("El formato introducido no es numérico.");
-                return;
+            System.out.println("Introduce el segundo operando:"); //Se introduce el segundo operando
+            try { //Se intenta introducir como double
+                operando2 = read.nextDouble(); //Lee operando2 como double
+            } catch (InputMismatchException e) { //Si da el siguiente error
+                System.out.println("El formato introducido no es numérico."); //Te manda un mensaje de error
+                return; //Te echa del programa :0
             }
         }
 
+        //
         switch (operacion) {
             case "+":
                 resultado = operando1 + operando2;
