@@ -9,7 +9,6 @@ public class PRACTICATERNARIA {
        int resultado = a++ == 6 && b-- == 8 ? c + a++ == 10 ? c-- : a++ : a + c++;
         System.out.println(resultado);
 
-    a = 1 ? "si" : "no";
 
     }
 }
