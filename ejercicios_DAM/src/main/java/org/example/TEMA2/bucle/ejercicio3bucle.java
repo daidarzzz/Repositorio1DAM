@@ -1,6 +1,4 @@
-package org.example.TEMA2;
-
-import java.util.Scanner;
+package org.example.TEMA2.bucle;
 
 public class ejercicio3bucle {
     static void main() {

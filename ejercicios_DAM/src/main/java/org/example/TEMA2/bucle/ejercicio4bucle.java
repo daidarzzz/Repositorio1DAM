@@ -1,15 +1,15 @@
-package org.example.TEMA2;
+package org.example.TEMA2.bucle;
 
 import java.util.Scanner;
 
-public class ejercicio4bucleREVERSA {
+public class ejercicio4bucle {
     static void main() {
         Scanner read = new Scanner(System.in);
         System.out.println("Introduce una cadena: ");
         String cadena = read.next();
         int longitud = cadena.length();
-        for (int i = longitud - 1 ; i >= 0 ; i--) {
-            System.out.print(cadena.charAt(i));
+        for (int i = 0 ; i < longitud ; i++) {
+            System.out.println(cadena.charAt(i));
         }
     }
 }
