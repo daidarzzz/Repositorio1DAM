@@ -32,7 +32,7 @@ public class practica2 {
         System.out.println("---------------------------");
         System.out.println("Elige un operando: ");
         //Pide el operando a realizar
-        operando = read.next().substring(0); //El operando será el primer carácter que sea escrita por el usuario
+        operando = read.next().substring(0,1); //El operando será el primer carácter que sea escrita por el usuario
         operando = operando.toLowerCase(); //Convierto el carácter en minúscula
 
         //Si el operando es suma, resta, multiplicación o división . . .
