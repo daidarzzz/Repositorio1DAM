@@ -90,7 +90,7 @@ public class practica3 {
                     System.out.println("No se encontró un número para validar el ISBN.");
                 }
                 break;
-                
+
             case "x":
                 System.out.println("¡HASTA LUEGO!");
                 break;
