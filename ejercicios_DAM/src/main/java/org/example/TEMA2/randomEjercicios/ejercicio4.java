@@ -9,7 +9,6 @@ public class ejercicio4 {
         String caracter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         String password = "";
         int longitud_password = aleatorio.nextInt(8, 13);
-        String hola = "1234567890";
 
         for (int i = 1 ; i <= longitud_password ; i++) {
             if (password.length() == longitud_password) {
