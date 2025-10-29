@@ -13,8 +13,11 @@ public class calculo_edad {
             System.out.println("Debe ser un número del 1900 para arriba");
             return;
         }
+        if (anyo > ANYO_ACTUAL) {
+            System.out.println("Debe ser un número entre (1900 - 2025)");
+            return;
+        }
         int longitud = ANYO_ACTUAL - anyo;
-        System.out.println(longitud);
         for (int i = 0; i <= longitud ; i++) {
             System.out.println(anyo + ": " + i + " años" );
             anyo++;
