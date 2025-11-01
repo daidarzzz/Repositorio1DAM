@@ -8,18 +8,19 @@ public class piedra_papel_tijera {
         Random aleatorio = new Random();
         Scanner read = new Scanner(System.in);
         boolean ganador = false;
-            int eleccion_ia = aleatorio.nextInt(1,4);
+            int eleccion_ia = 0;
             int puntos_ia = 0;
             int puntos_user = 0;
             int ronda = 1;
         do {
+            eleccion_ia = aleatorio.nextInt(1,4);
             System.out.println("Ronda " + ronda);
-            System.out.print("Elige (p/a/t): ");
             System.out.println("Marcador actual (PC - USUARIO): " + puntos_ia + "-" + puntos_user);
-            char eleccion_user_char = read.next().charAt(0);
-            int eleccion_user = eleccion_user_char == 'p' ? 1 : eleccion_user_char == 'a' ? 2 : 3;
-            System.out.println(eleccion_user);
+            System.out.print("Elige (p/a/t): ");
 
+            char eleccion_user_char = read.next().charAt(0);
+            int eleccion_user = eleccion_user_char == 'p' ? 1 : eleccion_user_char == 'a' ? 2 : eleccion_user_char == 't' ? 3 : 4;
+            System.out.println("Has elegido: " + (eleccion_user == 1 ? "PIEDRA" : eleccion_user == 2 ? "PAPEL" : eleccion_user == 3 ? "TIJERA" : "OH NO..."));
 
                 switch (eleccion_user) {
                     case 1:
