@@ -61,8 +61,6 @@ public class practica3 {
             }
         }
 
-
-
         switch (opcion) { //se evaluarán los posibles casos de opción
             case "1": //en caso de que opción sea equivalente a "1" . . .
                 if (resultado % 11 == 0) { //Si el resultado es múltiplo de 11 . . .
