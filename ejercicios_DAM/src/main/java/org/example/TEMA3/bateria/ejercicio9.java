@@ -1,4 +1,4 @@
-package org.example.TEMA3;
+package org.example.TEMA3.bateria;
 
 import java.util.Scanner;
 

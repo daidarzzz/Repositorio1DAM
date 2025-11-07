@@ -1,7 +1,6 @@
-package org.example.TEMA3;
+package org.example.TEMA3.bateria;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public class ejercicio2 {
     static void main() {
