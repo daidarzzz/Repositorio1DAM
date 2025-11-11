@@ -48,32 +48,34 @@ public class practica1 {
             }
         } while (true); //Mientras que no haya un break, el bucle seguirá.
 
-        int quien_empieza = aleatorio.nextInt(7 + 1); //Número aleatorio entre 0 y 7
+        int quien_empieza = aleatorio.nextInt(7); //Número aleatorio entre 0 y 6
         System.out.println("¡Empieza la batalla!");
         System.out.println("La batalla inicia con el samurai " + (quien_empieza+1)); //Te indica qué samurai empieza (Siempre se suma 1 para que empiece en 1 y no en 0)
         //Contador de puntos de equipo 1 y 2
         int contador_equipo1 = 0;
         int contador_equipo2 = 0;
-        if (quien_empieza != 0) { //Si el número aleatorio de quien empieza no es cero . . .
-            for (int i = quien_empieza ; i < vector_general.length ; i++) { //i es igual a "quien_empieza", mientras que i sea menor a la longitud del vector general, i se sumará en 1
-                System.out.print("Samurai " + (i+1) + ". ");
-                if (vector_equipo1[i] > vector_general[i]) {
-                    System.out.println("Gana equipo 1. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
-                    contador_equipo1++;
-                } else if (vector_equipo1[i] < vector_general[i]) {
-                    System.out.println("Gana equipo 2. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
-                    contador_equipo2++;
-                } else {
-                    System.out.println("EMPATE. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
-                }
+        for (int i = quien_empieza ; i < vector_general.length ; i++) { //i es igual a "quien_empieza", mientras que i sea menor a la longitud del vector general, i se sumará en 1
+            System.out.print("Samurai " + (i+1) + ". ");
+            if (vector_equipo1[i] > vector_equipo2[i]) { //Si el samurai del equipo 1 tiene una potencia mayor que el del equipo 2 . . .
+                System.out.println("Gana equipo 1. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
+                contador_equipo1++; //+1 punto para equipo 1 (cada punto para un equipo es una baja para el equipo contrario)
+            } else if (vector_equipo1[i] < vector_equipo2[i]) { //De lo contrario, si el samurai del equipo 2 tiene una potencia mayor que el del equipo 1 . . .
+                System.out.println("Gana equipo 2. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
+                contador_equipo2++;
+            } else { //Si ambos samurais tienen la misma potencia . . .
+                System.out.println("EMPATE. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
+                //Nadie consigue puntos
             }
         }
+
+        //En caso de que el número aleatorio fuese 0, la batalla comenzaría directamente con este for. En caso contrario, este for se ejecutará después del anterior, para continuar la batalla con los samurais que faltan hasta llegar al que inició el combate.
+
         for (int i = 0 ; i < quien_empieza ; i++) {
             System.out.print("Samurai " + (i+1) + ". ");
-            if (vector_equipo1[i] > vector_general[i]) {
+            if (vector_equipo1[i] > vector_equipo2[i]) {
                 System.out.println("Gana equipo 1. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
                 contador_equipo1++;
-            } else if (vector_equipo1[i] < vector_general[i]) {
+            } else if (vector_equipo1[i] < vector_equipo2[i]) {
                 System.out.println("Gana equipo 2. " + vector_equipo1[i] + " vs " + vector_equipo2[i]);
                 contador_equipo2++;
             } else {
@@ -81,9 +83,10 @@ public class practica1 {
             }
         }
 
-        if (contador_equipo1 > contador_equipo2) System.out.println("GANÓ EL EQUIPO 1. EQUIPO 2 HA TENIDO " + contador_equipo1 + " BAJAS.");
-        else if (contador_equipo1 < contador_equipo2) System.out.println("GANÓ EL EQUIPO 2. EQUIPO 1 HA TENIDO " + contador_equipo2 + " BAJAS.");
-        else System.out.println("EMPATE ENTRE LOS DOS EQUIPOS.");
+        if (contador_equipo1 > contador_equipo2) System.out.println("GANÓ EL EQUIPO 1. EQUIPO 2 HA TENIDO " + contador_equipo1 + " BAJAS."); //Si el equipo 1 tiene más puntos . . .
+        else if (contador_equipo1 < contador_equipo2) System.out.println("GANÓ EL EQUIPO 2. EQUIPO 1 HA TENIDO " + contador_equipo2 + " BAJAS."); //Si el equipo 2 tiene más puntos . . .
+        else System.out.println("EMPATE ENTRE LOS DOS EQUIPOS."); // Si tienen los mismos puntos . . .
+
         //System.out.println("PUNTUACIÓN: EQUIPO 1 (" + contador_equipo1 + ") EQUIPO 2 (" + contador_equipo2 + ")");
     }
 }
