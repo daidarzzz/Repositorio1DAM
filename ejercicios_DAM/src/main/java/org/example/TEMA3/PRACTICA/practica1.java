@@ -1,4 +1,5 @@
 package org.example.TEMA3.PRACTICA;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class practica1 {
                 if (vector_general[i] < 1 || vector_general[i] > 24) {
                     mayor_menor = true;
                     break;
-                    
+
                 }
                 sumatorio += vector_general[i];
             }

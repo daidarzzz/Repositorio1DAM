@@ -20,5 +20,10 @@ public class ARRAYS_METODOS {
             System.out.println("LO TIENE");
         } else System.out.println("NO LO TIENE");
 
+
+        //ORDENAR ARRAY SIN ROMPER EL ORIGINAL
+        Integer[] array_sort = arraypro.clone();
+        Arrays.sort(array_sort);
+
     }
 }
