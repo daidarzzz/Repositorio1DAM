@@ -38,6 +38,7 @@ public class practica1 {
                 if (vector_general[i] < 1 || vector_general[i] > 24) {
                     mayor_menor = true;
                     break;
+                    
                 }
                 sumatorio += vector_general[i];
             }
