@@ -28,17 +28,22 @@ public class practica1 {
             String[] equipo = equipo_string.split(" "); //divide por espacios (" ") cada potencia, para poder después meterla en el array general
             vector_general = new int[equipo.length]; //El vector general tendrá los mismos parámetros que tenía el String "equipo"
 
+            if (vector_general.length != 7) {
+                System.out.println("El equipo debe de tener 7 samurais"); //Si el array general no mide 7 dará error
+                continue;
+            }
+
             for (int i = 0; i < equipo.length; i++) { //i = 0, mientras que i sea menor que la longitud de equipo, i se sumará en 1
                 vector_general[i] = Integer.parseInt(equipo[i]); //
                 if (vector_general[i] < 1 || vector_general[i] > 24) {
                     mayor_menor = true;
+                    break;
                 }
                 sumatorio += vector_general[i];
             }
             //Con cada error a continuación hará que se tenga que volver a empezar el bucle (pero si ya tienes un equipo creado no se vuelven a introducir los datos de ese equipo)
             if (mayor_menor) System.out.println("El valor de potencia del samurai debe de estar entre 1 y 24."); //Si mayor_menor es true te indicará el error
             else if (sumatorio != POTENCIA_REQUERIDA) System.out.println("La potencia total no suma 30."); //Si el sumatorio de potencias de samurais no da 30 dará error
-            else if (vector_general.length != 7) System.out.println("El equipo debe de tener 7 samurais"); //Si el array general no mide 7 dará error
             else if (!inicio_correcto) { //Si el inicio no es correcto (no se ha creado aún el array de equipo 1) . . .
                 vector_equipo1 = vector_general.clone(); //El array de equipo 1 clona el array general
                 inicio_correcto = true; //Al haber clonado correctamente el array general en el equipo 1, inicio_correcto será true, permitiendo acceder a equipo 2
