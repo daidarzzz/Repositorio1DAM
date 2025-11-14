@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class eliminarDuplicados2 {
     static void main() {
-        int[] original = {1, 2, 2, 2, 3, 3, 4, 4, 5,5};
+        int[] original = {1, 2, 2, 2, 3, 3, 4, 4, 5, 5};
         int tam = 1;
         for (int i = 0 ; i < original.length-1 ; i++) {
 

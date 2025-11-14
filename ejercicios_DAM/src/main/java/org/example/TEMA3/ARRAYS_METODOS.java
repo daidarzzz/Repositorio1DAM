@@ -41,5 +41,14 @@ public class ARRAYS_METODOS {
         System.out.println(posicion);
 
         //Si no funciona, es probable que sea porque debe de ser integer / debe de ser int el array, prueba
+
+
+
+        //ELIMINAR DUPLICADOS
+        int numeritos[] = {1, 2, 2, 2, 2, 3, 4, 5, 5, 5, 6, 6, 7};
+
+        int numeritos_limpio[] = Arrays.stream(numeritos).distinct().toArray();
+
+        System.out.println(Arrays.toString(numeritos_limpio));
     }
 }
