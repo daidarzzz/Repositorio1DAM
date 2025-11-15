@@ -16,21 +16,40 @@ public class practica2 {
 
         if (formato) {
             String[] boleto_usuario_vector = boleto_usuario_sucio.split("[-/]");
-            int[] boleto_usuario_vector_entero = new int[boleto_usuario_vector.length];
+            Integer[] boleto_usuario_vector_entero = new Integer[boleto_usuario_vector.length];
             for (int i = 0 ; i < boleto_usuario_vector.length ; i++) {
                 boleto_usuario_vector_entero[i] = Integer.parseInt(boleto_usuario_vector[i]);
             }
-            int[] boleto_ganador = new int[boleto_usuario_vector.length-1];
-            do {
-                for (int i = 0 ; i <  boleto_ganador.length; i++) {
+            Integer[] boleto_ganador = new Integer[boleto_usuario_vector.length-1];
+//            do {
+//                for (int i = 0 ; i <  boleto_ganador.length; i++) {
+//                    boleto_ganador[i] = aleatorio.nextInt(1,50);
+//                }
+//                int[] boleto_ganador_limpio = Arrays.stream(boleto_ganador).distinct().toArray();
+//
+//                if (boleto_ganador_limpio.length == boleto_usuario_vector.length-1) {
+//                    seguir = false;
+//                }
+//            } while (seguir);
+            boolean comprobar = true;
+            for (int i = 0 ; i <  boleto_ganador.length; i++) {
                     boleto_ganador[i] = aleatorio.nextInt(1,50);
                 }
-                int[] boleto_ganador_limpio = Arrays.stream(boleto_ganador).distinct().toArray();
+            while(comprobar) {
+                comprobar = false;
 
-                if (boleto_ganador_limpio.length == boleto_usuario_vector.length-1) {
-                    seguir = false;
+                Arrays.sort(boleto_ganador);
+                for (int i = 0; i < boleto_ganador.length -1 ; i++) {
+
+                    if (boleto_ganador[i].equals(boleto_ganador[i+1])) {
+                        boleto_ganador[i] = aleatorio.nextInt(1, 50);
+                        comprobar = true;
+                        Arrays.sort(boleto_ganador);
+                    }
+
                 }
-            } while (seguir);
+
+            }
 
             Arrays.sort(boleto_ganador);
             System.out.println("Boleto ganador: " + Arrays.toString(boleto_ganador));
@@ -38,7 +57,7 @@ public class practica2 {
             int contador_numeros_ganadores = 0;
 
             for (int i = 0; i < boleto_usuario_vector.length -1 ; i++) {
-                if (boleto_usuario_vector_entero[i] == boleto_ganador[i]) {
+                if (Arrays.asList(boleto_ganador).contains(boleto_usuario_vector_entero[i])) {
                     contador_numeros_ganadores++;
                 }
             }
