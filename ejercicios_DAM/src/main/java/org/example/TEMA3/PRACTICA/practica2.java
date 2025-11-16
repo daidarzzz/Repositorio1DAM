@@ -20,7 +20,7 @@ public class practica2 {
             for (int i = 0 ; i < boleto_usuario_vector.length ; i++) {
                 boleto_usuario_vector_entero[i] = Integer.parseInt(boleto_usuario_vector[i]);
             }
-            Integer[] boleto_ganador = new Integer[boleto_usuario_vector.length-1];
+            Integer[] boleto_ganador = new Integer[boleto_usuario_vector.length -1];
 //            do {
 //                for (int i = 0 ; i <  boleto_ganador.length; i++) {
 //                    boleto_ganador[i] = aleatorio.nextInt(1,50);
@@ -49,22 +49,42 @@ public class practica2 {
 
                 }
 
+
             }
+            int complementario = -1;
+            int reintegro = aleatorio.nextInt(0,10);
+            boolean reintegro_acertado = false;
+            boolean complementario_acertado = false;
 
+            if (boleto_usuario_vector_entero[boleto_usuario_vector_entero.length -1] == reintegro) reintegro_acertado = true;
+
+            do {
+                complementario = aleatorio.nextInt(0,50);
+            } while (Arrays.asList(boleto_ganador).contains(complementario));
+            if (Arrays.asList(boleto_usuario_vector_entero).contains(complementario)) complementario_acertado = true;
             Arrays.sort(boleto_ganador);
-            System.out.println("Boleto ganador: " + Arrays.toString(boleto_ganador));
-
+            System.out.println("BOLETO GANADOR: " + Arrays.toString(boleto_ganador));
+            System.out.println("Complementario: " + complementario);
+            System.out.println("Reintegro: " + reintegro);
             int contador_numeros_ganadores = 0;
 
-            for (int i = 0; i < boleto_usuario_vector.length -1 ; i++) {
+            for (int i = 0; i < boleto_ganador.length ; i++) {
                 if (Arrays.asList(boleto_ganador).contains(boleto_usuario_vector_entero[i])) {
                     contador_numeros_ganadores++;
                 }
             }
-
-            System.out.println("HAS ACERTADO: " + contador_numeros_ganadores + " NÚMEROS");
-
-
+            System.out.println();
+            System.out.println("RESULTADOS:");
+            System.out.println(contador_numeros_ganadores + (contador_numeros_ganadores == 1 ? " acierto." : " aciertos."));
+            if (reintegro_acertado) System.out.println("Reintegro.");
+            System.out.println();
+            System.out.println("--------------");
+            System.out.println();
+            if (contador_numeros_ganadores >= 3) {
+                System.out.print("Perteneces a la " + (contador_numeros_ganadores == 6 && reintegro_acertado ? "Categoría especial" : contador_numeros_ganadores == 6 ? "1ª Categoría" : contador_numeros_ganadores == 5 && complementario_acertado ? "2ª Categoría" : contador_numeros_ganadores == 5 ? "3ª Categoría" : contador_numeros_ganadores == 4 ? "4ª Categoría" : "5ª Categoría"));
+            } else {
+                System.out.println(reintegro_acertado ? "Acertaste el número del reintegro" : "No has sido premiado.");
+            }
 
         } else {
             System.out.println("Formato incorrecto. (N-N-N-N-N-N/R)");
