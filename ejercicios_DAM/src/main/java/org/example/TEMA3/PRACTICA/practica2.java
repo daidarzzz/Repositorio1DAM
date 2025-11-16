@@ -17,10 +17,10 @@ public class practica2 {
         if (formato) {
             String[] boleto_usuario_vector = boleto_usuario_sucio.split("[-/]");
             Integer[] boleto_usuario_vector_entero = new Integer[boleto_usuario_vector.length];
-            for (int i = 0 ; i < boleto_usuario_vector.length ; i++) {
+            for (int i = 0; i < boleto_usuario_vector.length; i++) {
                 boleto_usuario_vector_entero[i] = Integer.parseInt(boleto_usuario_vector[i]);
             }
-            Integer[] boleto_ganador = new Integer[boleto_usuario_vector.length -1];
+            Integer[] boleto_ganador = new Integer[boleto_usuario_vector.length - 1];
 //            do {
 //                for (int i = 0 ; i <  boleto_ganador.length; i++) {
 //                    boleto_ganador[i] = aleatorio.nextInt(1,50);
@@ -32,16 +32,16 @@ public class practica2 {
 //                }
 //            } while (seguir);
             boolean comprobar = true;
-            for (int i = 0 ; i <  boleto_ganador.length; i++) {
-                    boleto_ganador[i] = aleatorio.nextInt(1,50);
-                }
-            while(comprobar) {
+            for (int i = 0; i < boleto_ganador.length; i++) {
+                boleto_ganador[i] = aleatorio.nextInt(1, 50);
+            }
+            while (comprobar) {
                 comprobar = false;
 
                 Arrays.sort(boleto_ganador);
-                for (int i = 0; i < boleto_ganador.length -1 ; i++) {
+                for (int i = 0; i < boleto_ganador.length - 1; i++) {
 
-                    if (boleto_ganador[i].equals(boleto_ganador[i+1])) {
+                    if (boleto_ganador[i].equals(boleto_ganador[i + 1])) {
                         boleto_ganador[i] = aleatorio.nextInt(1, 50);
                         comprobar = true;
                         Arrays.sort(boleto_ganador);
@@ -52,14 +52,15 @@ public class practica2 {
 
             }
             int complementario = -1;
-            int reintegro = aleatorio.nextInt(0,10);
+            int reintegro = aleatorio.nextInt(0, 10);
             boolean reintegro_acertado = false;
             boolean complementario_acertado = false;
 
-            if (boleto_usuario_vector_entero[boleto_usuario_vector_entero.length -1] == reintegro) reintegro_acertado = true;
+            if (boleto_usuario_vector_entero[boleto_usuario_vector_entero.length - 1] == reintegro)
+                reintegro_acertado = true;
 
             do {
-                complementario = aleatorio.nextInt(0,50);
+                complementario = aleatorio.nextInt(0, 50);
             } while (Arrays.asList(boleto_ganador).contains(complementario));
             if (Arrays.asList(boleto_usuario_vector_entero).contains(complementario)) complementario_acertado = true;
             Arrays.sort(boleto_ganador);
@@ -68,7 +69,7 @@ public class practica2 {
             System.out.println("Reintegro: " + reintegro);
             int contador_numeros_ganadores = 0;
 
-            for (int i = 0; i < boleto_ganador.length ; i++) {
+            for (int i = 0; i < boleto_ganador.length; i++) {
                 if (Arrays.asList(boleto_ganador).contains(boleto_usuario_vector_entero[i])) {
                     contador_numeros_ganadores++;
                 }
@@ -85,7 +86,6 @@ public class practica2 {
             } else {
                 System.out.println(reintegro_acertado ? "Acertaste el número del reintegro" : "No has sido premiado.");
             }
-
         } else {
             System.out.println("Formato incorrecto. (N-N-N-N-N-N/R)");
         }
