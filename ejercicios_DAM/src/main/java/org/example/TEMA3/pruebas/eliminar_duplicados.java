@@ -1,10 +1,18 @@
 package org.example.TEMA3.pruebas;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class eliminar_duplicados {
     static void main(String[] args) {
-        int[] array = {3, 4, 4, 8, 2, 12, 9, 6, 6, 12 };
+        Random aleatorio = new Random();
+
+        int[] array = new int[50];
+        for (int i = 0 ; i < array.length ; i++) {
+            array[i] = aleatorio.nextInt(0,100);
+        }
+        System.out.println(Arrays.toString(array));
+
         int aux;
         boolean fin = false;
         int tam = 1;
@@ -23,7 +31,7 @@ public class eliminar_duplicados {
 
         System.out.println(Arrays.toString(array));
 
-
+        //BUBBLE SORT PROPIO
         for (int i = 0 ; i < array.length -1; i++) {
             if (array[i] == array[i+1]) {
                 array[i] = -1000;
