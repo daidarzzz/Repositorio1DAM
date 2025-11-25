@@ -69,42 +69,63 @@ public class Practica3 {
         boolean colores_validos = true;
 
 
+        int bloque_fila = 0;
+        int bloque_columna = 0;
+        int num_bloque = 0;
+        int bloques_vertical = alto / 8;
+        String[] colores = new String[2];
 
-        externo:
-        for (int fila = 0; fila < alto; fila += 8) {
 
-            for (int columna = 0; columna < ancho; columna += 8) {
 
-                String[] colores = new String[2];
+
+        final_bucle:
+        do {
+            System.out.println("BLOQUE " + num_bloque);
+
+
+            for (int i = bloque_fila; i < bloque_fila + 8; i++) {
                 contador_colores = 0;
+                for (int j = bloque_columna; j < bloque_columna + 8 ; j++) {
 
-                for (int i = 0; i < 8; i++) {
-
-                    for (int j = 0; j < 8; j++) {
-
-                        String pixel = pixeles[i + fila][j + columna].toUpperCase();
-
-
-                        if (!Arrays.asList(colores).contains(pixel) && contador_colores == 2) {
-                            colores_validos = false;
-                            break externo;
-                        }
-
-                        if (!Arrays.asList(colores).contains(pixel)) {
-                            colores[contador_colores] = pixel;
-                            contador_colores++;
-                        }
-
-
-
+                    String pixel = pixeles[i][j].toUpperCase();
+                    System.out.print(pixel);
+                    if (!Arrays.asList(colores).contains(pixel) && contador_colores == 2) {
+                        colores_validos = false;
+                        break final_bucle;
                     }
 
+                    if (!Arrays.asList(colores).contains(pixel)) {
+                        colores[contador_colores] = pixel;
+                        contador_colores++;
+                    }
                 }
+
+                System.out.println();
             }
-        }
 
-        System.out.println(colores_validos ? "Es compatible con un ZX Spectrum" : "No es compatible con un ZX Spectrum");
+            bloque_fila += 8;
+            num_bloque++;
+            if (num_bloque == bloques_vertical) {
+                bloque_fila = 0;
+                bloque_columna += 8;
+            }
 
+        } while (bloque_fila != alto && bloque_columna != ancho);
+
+
+
+        System.out.println((colores_validos ? "Es compatible con un ZX Spectrum" : "No es compatible con un ZX Spectrum"));
+
+
+//        if (!Arrays.asList(colores).contains(pixel) && contador_colores == 2) {
+//            colores_validos = false;
+//            break externo;
+//        }
+//
+//        if (!Arrays.asList(colores).contains(pixel)) {
+//            colores[contador_colores] = pixel;
+//            contador_colores++;
+//        }
 
     }
 }
