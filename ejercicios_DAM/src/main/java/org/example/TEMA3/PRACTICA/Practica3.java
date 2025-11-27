@@ -125,7 +125,7 @@ public class Practica3 {
                 bloque_columna += 8; //pero las columnas se incrementan en 8
             }
 
-        } while (bloque_fila != alto && bloque_columna != ancho); //Mientras que el bloque de fila y de columna no hayan llegado al final . . .
+        } while (bloque_fila != alto && bloque_columna < ancho); //Mientras que el bloque de fila y de columna no hayan llegado al final . . .
 
 
         //Ternaria que evalúa si los colores son validos, si es así, te dice que el spectrum es compatible, de lo contrario, que no lo es.

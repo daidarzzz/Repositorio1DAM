@@ -28,7 +28,7 @@ public class ARRAYS_METODOS {
 
         //ORDENAR DESCENDENTE
         Integer[] array_sort2 = arraypro.clone();
-        Arrays.sort(array_sort, Collections.reverseOrder());
+        Arrays.sort(array_sort2, Collections.reverseOrder());
 
         System.out.println(Arrays.toString(array_sort));
         System.out.println(Arrays.toString(array_sort2));
