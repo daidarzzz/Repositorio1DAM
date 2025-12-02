@@ -1,5 +1,7 @@
 package org.example.TEMA3;
 
+import org.example.TEMA4.Main;
+
 import java.util.Scanner;
 
 public class navidadSPLIT {
@@ -28,8 +30,6 @@ public class navidadSPLIT {
             }
 
         }
-
-
 
     }
 }
