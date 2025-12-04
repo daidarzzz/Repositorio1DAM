@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Prefabs {
-    public static Scanner read = new Scanner(System.in);
+    private static Scanner read = new Scanner(System.in);
 
     public static int pedirEntero(String texto) {
         int num = 0;
