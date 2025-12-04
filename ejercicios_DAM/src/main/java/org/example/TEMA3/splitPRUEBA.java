@@ -1,5 +1,7 @@
 package org.example.TEMA3;
 
+import org.example.TEMA4.Prefabs;
+
 import java.util.Arrays;
 
 public class splitPRUEBA {
@@ -15,7 +17,7 @@ public class splitPRUEBA {
         for (int i = 0 ; i < profesores.length ; i++) {
             vector[i] = Integer.parseInt(profesores[i]);
         } //da error
-
+        
 
     }
 }

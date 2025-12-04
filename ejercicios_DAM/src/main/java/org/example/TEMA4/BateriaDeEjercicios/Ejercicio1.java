@@ -1,5 +1,7 @@
 package org.example.TEMA4.BateriaDeEjercicios;
 
+import org.example.TEMA4.Prefabs;
+
 import java.util.Scanner;
 
 public class Ejercicio1 {
@@ -8,8 +10,7 @@ public class Ejercicio1 {
 
         Scanner read = new Scanner(System.in);
 
-        System.out.println("Introduce un número...");
-        int numero = read.nextInt();
+        int numero = Prefabs.pedirEntero("Introduce un número: ");
 
         int resultado = cubo(numero);
 
