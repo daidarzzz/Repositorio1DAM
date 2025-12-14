@@ -17,7 +17,7 @@ public class pruebaRecursividad {
             {"-", "-", "-", "-", "-", "-", "-", "-"}
     };
     static String[][] matrizVisible = new String[8][8];
-    static void main() {
+    public static void main(String[] args) {
 
         rellenarMatrices();
         imprimirMatriz(matrizVisible);
@@ -51,46 +51,66 @@ public class pruebaRecursividad {
 
     public static void limpiarCeros(int fila, int columna) {
 
-        int max = 8 * 8;
-        int[] posicionesFila = new int[max];
-        int[] posicionesColumna = new int[max];
-        int posicionAux = 0;
-        int contador = 0;
-        for (int i = fila-1; i <= fila+1; i++) {
-            for (int j = columna-1; j <= columna+1; j++) {
-                if (matrizReal[i][j].equals("*")) contador++;
-                if (matrizVisible[i][j].equals("X")) {
-                    posicionesFila[posicionAux] = i;
-                    posicionesColumna[posicionAux] = j;
-                    posicionAux++;
+        int maximo = 8*8;
+
+        int[] filasPorLimpiar = new int[maximo];
+        int[] columnasPorLimpiar = new int[maximo];
+
+        int celdaActual = 0;
+        int celdasTotales = 1;
+
+        filasPorLimpiar[0] = fila;
+        columnasPorLimpiar[0] = columna;
+
+        while (celdaActual < celdasTotales) {
+
+
+
+            int filaActual = filasPorLimpiar[celdaActual];
+            int columnaActual = columnasPorLimpiar[celdaActual];
+
+            int contadorBombas = 0;
+            celdaActual++;
+
+
+
+            for (int i = filaActual -1; i <= filaActual +1; i++) {
+                for (int j = columnaActual -1; j <= columnaActual +1 ; j++) {
+
+                    if (i < 0 || i >= 8 || j < 0 || j >= 8) continue;
+
+                    if (matrizReal[i][j].equals("*")) contadorBombas++;
+
                 }
             }
-        }
-        do {
-            for (int i = posicionesFila[posicionAux]-1; i <= posicionesFila[posicionAux]+1; i++) {
-                for (int j = posicionesColumna[posicionAux]-1; j <= posicionesColumna[posicionAux]+1; j++) {
-                    if (matrizReal[i][j].equals("*")) contador++;
-                    if (matrizVisible[i][j].equals("X")) {
-                        posicionesFila[posicionAux] = i;
-                        posicionesColumna[posicionAux] = j;
-                        posicionAux++;
+
+            if (contadorBombas != 0) {
+                matrizVisible[filaActual][columnaActual] = Integer.toString(contadorBombas);
+            } else {
+
+                matrizVisible[filaActual][columnaActual] = "-";
+
+                for (int i = filaActual -1; i <= filaActual +1; i++) {
+                    for (int j = columnaActual -1; j <= columnaActual +1 ; j++) {
+
+                        if (i < 0 || i >= 8 || j < 0 || j >= 8) continue;
+
+                        if (matrizVisible[i][j].equals("X")) {
+                            filasPorLimpiar[celdasTotales] = i;
+                            columnasPorLimpiar[celdasTotales] = j;
+                            celdasTotales++;
+                        }
+
                     }
                 }
+
+
             }
 
-            contador++;
-            if (contador != 0) matrizVisible[fila][columna] = Integer.toString(contador);
-            else matrizVisible[fila][columna] = "-";
-        } while (contador < posicionAux);
-
-
-        for (int i = 0; i < posicionAux; i++) {
-            System.out.print(posicionesFila[i]);
-            System.out.print(" " +posicionesColumna[i]);
-            System.out.println();
         }
-
     }
+
+
 
 }
 
