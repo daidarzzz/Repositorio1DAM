@@ -2,44 +2,72 @@ package org.example.TEMA4;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Buscaminas {
 
-    public static String[][] matriz;
+    public static String[][] matrizReal;
 
 
     static int numFilas = 0;
     static int numColumnas = 0;
     static int celdasPorDescubrir = 0;
+    static String[][] matrizVisible;
     static Scanner read = new Scanner(System.in);
     static Random aleatorio = new Random();
 
 
     static void main(String[] args) {
 
-        numFilas = read.nextInt();
-        numColumnas = read.nextInt();
+        numFilas = pedirEntero("Introduce el número de filas: ");
+        numColumnas = pedirEntero("Introduce el número de columnas: ");
 
-        matriz = new String[numFilas][numColumnas];
+        if (numFilas > 50 || numColumnas > 50) {
+            System.out.println("No puede haber más de 50 filas ni 50 columnas");
+            return;
+        }
+
+        matrizReal = new String[numFilas][numColumnas];
         rellenarMatriz();
 
         imprimirMatriz();
 
-        String[][] matrizVisible = crearMatrizVisible();
+        matrizVisible = crearMatrizVisible();
 
-        celdasPorDescubrir = Prefabs.pedirEntero("Introduce el número de celdas a descubrir: ");
+        celdasPorDescubrir = pedirEntero("Introduce el número de celdas a descubrir: ");
         read.nextLine();
-        pedirCeldas(celdasPorDescubrir, matrizVisible);
+        pedirCeldas(celdasPorDescubrir);
         
     }
+
+    public static int pedirEntero(String texto) {
+        int num = 0;
+        boolean seguir = true;
+
+        do {
+            System.out.print(texto);
+            try {
+                num = read.nextInt();
+                read.nextLine();
+                seguir = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Error. Debes introducir un número entero");
+                read.nextLine();
+            }
+        } while (seguir);
+
+        return num;
+    }
+
+
 
     public static void rellenarMatriz () {
 
         int filaActual = 0;
         externo:
-        for (int i = 0; i < matriz.length; i++) {
+        for (int i = 0; i < matrizReal.length; i++) {
             System.out.println("Introduce los " + numColumnas + " carácteres de la fila " + filaActual);
             String valoresFilaActual[] = read.next().split("");
 
@@ -48,13 +76,13 @@ public class Buscaminas {
                 System.out.println("La fila debe de tener " + numColumnas + " carácteres.");
                 continue;
             }
-            for (int j = 0; j < matriz[0].length; j++) {
+            for (int j = 0; j < matrizReal[0].length; j++) {
                 if (!valoresFilaActual[j].equals("*") && !valoresFilaActual[j].equals("-")) {
                     System.out.println("La fila debe de tener solo '-' o '*'. Cerrando el programa.");
                     i--;
                     continue externo;
                 }
-                matriz[i][j] = valoresFilaActual[j];
+                matrizReal[i][j] = valoresFilaActual[j];
             }
             filaActual++;
         }
@@ -65,9 +93,9 @@ public class Buscaminas {
     public static void imprimirMatriz () {
         System.out.println();
         System.out.println("Buscaminas:");
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[0].length; j++) {
-                System.out.print(matriz[i][j]);
+        for (int i = 0; i < matrizReal.length; i++) {
+            for (int j = 0; j < matrizReal[0].length; j++) {
+                System.out.print(matrizReal[i][j]);
             }
             System.out.println();
         }
@@ -86,7 +114,7 @@ public class Buscaminas {
         return matrizVisible;
     }
 
-    public static void pedirCeldas (int celdasPorDescubrir, String[][] matrizVisible) {
+    public static void pedirCeldas (int celdasPorDescubrir) {
 
 
 
@@ -94,7 +122,7 @@ public class Buscaminas {
             System.out.print("Qué celda quieres descubrir?: ");
             String[] celdaSeleccionada = read.nextLine().split(" ");
 
-            actualizarMatrizVisible(matrizVisible, matriz ,Integer.parseInt(celdaSeleccionada[0]), Integer.parseInt(celdaSeleccionada[1]));
+            limpiarCeros(Integer.parseInt(celdaSeleccionada[0]), Integer.parseInt(celdaSeleccionada[1]));
 
             imprimirMatrizVisible(matrizVisible);
 
@@ -110,7 +138,7 @@ public class Buscaminas {
         int fila = Integer.parseInt(celdaSeleccionada[0]);
         int columna = Integer.parseInt(celdaSeleccionada[1]);
 
-        if (matriz[fila][columna].equals("*"))  {
+        if (matrizReal[fila][columna].equals("*"))  {
             return false;
         }
 
@@ -118,29 +146,76 @@ public class Buscaminas {
     }
 
 
-    public static void actualizarMatrizVisible (String[][] matriz, String[][] matrizreal, int filas, int columnas) {
+    public static void limpiarCeros(int fila, int columna) {
 
-        if (matrizreal[filas][columnas].equals("*")) {
-            matriz[filas][columnas] = "*";
-        } else {
-            int contadorBombas = 0;
-            for (int i = filas -1; i <= filas+1; i++) {
-                for (int j = columnas -1; j <= columnas+1; j++) {
-                    if (matrizreal[i][j].equals("*")) contadorBombas++;
-                    matriz[filas][columnas] = Integer.toString(contadorBombas);
+        int maximo = numFilas*numColumnas;
+
+        int[] filasPendientes = new int[maximo];
+        int[] columnasPendientes = new int[maximo];
+
+        int celdaActual = 0;
+        int celdasTotales = 1;
+
+        filasPendientes[0] = fila;
+        columnasPendientes[0] = columna;
+
+        if (matrizReal[fila][columna].equals("*")) matrizVisible[fila][columna] = "*";
+        else {
+
+            while (celdaActual < celdasTotales) {
+
+
+
+                int filaActual = filasPendientes[celdaActual];
+                int columnaActual = columnasPendientes[celdaActual];
+
+                int contadorBombas = 0;
+                celdaActual++;
+
+
+
+                for (int i = filaActual -1; i <= filaActual +1; i++) {
+                    for (int j = columnaActual -1; j <= columnaActual +1 ; j++) {
+
+                        if (i < 0 || i >= numFilas || j < 0 || j >= numColumnas) continue;
+
+                        if (matrizReal[i][j].equals("*")) contadorBombas++;
+
+                    }
                 }
-            }
 
-            if (contadorBombas == 0) {
-                
+                if (contadorBombas != 0) {
+                    matrizVisible[filaActual][columnaActual] = Integer.toString(contadorBombas);
+                } else {
+
+                    matrizVisible[filaActual][columnaActual] = "-";
+
+                    for (int i = filaActual -1; i <= filaActual +1; i++) {
+                        for (int j = columnaActual -1; j <= columnaActual +1 ; j++) {
+
+                            if (i < 0 || i >= numFilas || j < 0 || j >= numColumnas) continue;
+
+                            if (matrizVisible[i][j].equals("X")) {
+                                filasPendientes[celdasTotales] = i;
+                                columnasPendientes[celdasTotales] = j;
+                                celdasTotales++;
+                            }
+
+                        }
+                    }
+
+
+                }
+
             }
         }
+
     }
 
     public static void imprimirMatrizVisible (String[][] matriz) {
         for(String fila[] : matriz) {
             for (String valor : fila) {
-                System.out.print(valor + " ");
+                System.out.print(valor);
             }
             System.out.println();
         }

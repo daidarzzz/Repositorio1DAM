@@ -19,15 +19,19 @@ public class pruebaRecursividad {
     static String[][] matrizVisible = new String[8][8];
     public static void main(String[] args) {
 
+
         rellenarMatrices();
         imprimirMatriz(matrizVisible);
         System.out.println();
         imprimirMatriz(matrizReal);
 
-        System.out.println("Introduce la celda a buscar: ");
-        String[] celdaSeleccionada = read.nextLine().split(" ");
-        limpiarCeros(Integer.parseInt(celdaSeleccionada[0]), Integer.parseInt(celdaSeleccionada[1]));
-        imprimirMatriz(matrizVisible);
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Introduce la celda a buscar: ");
+            String[] celdaSeleccionada = read.nextLine().split(" ");
+            limpiarCeros(Integer.parseInt(celdaSeleccionada[0]), Integer.parseInt(celdaSeleccionada[1]));
+            imprimirMatriz(matrizVisible);
+        }
+
     }
 
 
@@ -53,21 +57,21 @@ public class pruebaRecursividad {
 
         int maximo = 8*8;
 
-        int[] filasPorLimpiar = new int[maximo];
-        int[] columnasPorLimpiar = new int[maximo];
+        int[] filasPendientes = new int[maximo];
+        int[] columnasPendientes = new int[maximo];
 
         int celdaActual = 0;
         int celdasTotales = 1;
 
-        filasPorLimpiar[0] = fila;
-        columnasPorLimpiar[0] = columna;
+        filasPendientes[0] = fila;
+        columnasPendientes[0] = columna;
 
         while (celdaActual < celdasTotales) {
 
 
 
-            int filaActual = filasPorLimpiar[celdaActual];
-            int columnaActual = columnasPorLimpiar[celdaActual];
+            int filaActual = filasPendientes[celdaActual];
+            int columnaActual = columnasPendientes[celdaActual];
 
             int contadorBombas = 0;
             celdaActual++;
@@ -96,8 +100,8 @@ public class pruebaRecursividad {
                         if (i < 0 || i >= 8 || j < 0 || j >= 8) continue;
 
                         if (matrizVisible[i][j].equals("X")) {
-                            filasPorLimpiar[celdasTotales] = i;
-                            columnasPorLimpiar[celdasTotales] = j;
+                            filasPendientes[celdasTotales] = i;
+                            columnasPendientes[celdasTotales] = j;
                             celdasTotales++;
                         }
 
