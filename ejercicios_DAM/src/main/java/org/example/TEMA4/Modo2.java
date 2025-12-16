@@ -23,7 +23,6 @@ public class Modo2 {
             System.out.println((x+y)*2);
             return true;
         }
-    } // casoDePrueba
-
+    }
 
 }
