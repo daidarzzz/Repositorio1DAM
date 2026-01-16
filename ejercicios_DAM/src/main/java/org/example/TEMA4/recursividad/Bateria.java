@@ -8,7 +8,7 @@ public class Bateria {
         menu();
     }
 
-
+    public static String valorBinario = "";
     public static void menu(){
         System.out.println("**BATERIA DE EJERCICIOS DE RECURSIVIDAD**");
         System.out.println("Selecciona a continuación el modo que quieras ejecutar...");
@@ -39,12 +39,36 @@ public class Bateria {
 
                 break;
             case 3:
+                System.out.println("Elige el modo: ");
+                int modo = read.nextInt();
+                read.nextLine();
+                if (modo == 1) {
+                    System.out.print("Introduce el número: ");
+                    int n = read.nextInt();
+                    delReves(n);
+                } else if (modo == 2) {
+                    System.out.print("Introduce la frase: ");
+                    String frase = read.nextLine();
+                    char[] frase_char = frase.toCharArray();
+                    del_reves_char(frase_char.length -1, frase_char);
+                } else if (modo == 3) {
+                    System.out.print("Introduce la frase: ");
+                    String frase = read.nextLine();
+                    del_reves_char_sin_vector(frase.length()-1, frase);
+                }
 
-                System.out.println(delReves(5678));
                 break;
             case 4:
+                System.out.print("introduce el numero: ");
+                String frase = read.next();
+                System.out.print(binario(frase, frase.length() -1));
                 break;
             case 5:
+
+                System.out.print("Introduce un número: ");
+                num = read.nextInt();
+                System.out.println(pasarBinario(num));
+
                 break;
             case 6:
                 break;
@@ -74,13 +98,77 @@ public class Bateria {
 
     }
 
-    public static int delReves(int num) {
+    public static void delReves(int num) {
         if (num < 10) {
-            return 1;
+            System.out.print(num);
         }
         else {
-            return delReves(num/10) % 10;
+            System.out.print(num%10 + " ");
+            delReves(num/10);
         }
     }
 
+    public static void del_reves_char(int posicion, char[] frase) {
+        if (posicion >= 0) {
+            System.out.print(frase[posicion]);
+            del_reves_char(posicion -1, frase);
+        }
+    }
+
+    public static void del_reves_char_sin_vector(int posicion, String frase) {
+        if (posicion >= 0) {
+            System.out.print(frase.charAt(posicion));
+            del_reves_char_sin_vector(posicion -1, frase);
+        }
+    }
+
+    public static boolean binario (String num, int posicion) {
+        if (posicion >= 0) {
+            if (num.charAt(posicion) == '0' || num.charAt(posicion) == '1') {
+                return binario(num, posicion -1);
+
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    public static String pasarBinario(int num) {
+
+        if (num <= 1) {
+            return valorBinario = "1" + valorBinario;
+        } else {
+
+           valorBinario = (num % 2) + valorBinario;
+           return pasarBinario(num/2);
+        }
+
+    }
+
+
+
+    public static void mostrarSuma (int limite) {
+
+    }
+//    public static boolean binario (int num) {
+//
+//        if (num >= 10) {
+//
+//            if (num % 10 == 0 || num % 10 == 1) {
+//                binario(num/10);
+//            } else {
+//                return false;
+//            }
+//
+//        } else if (num == 0 || num == 1) {
+//            return true;
+//        }
+//        return false;
+//
+//
+//    }
 }
