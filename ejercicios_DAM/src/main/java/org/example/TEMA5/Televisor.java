@@ -2,12 +2,15 @@ package org.example.TEMA5;
 
 public class Televisor {
 
+    private static final int DEF_CANAL = 1;
+    private static final int DEF_VOLUMEN = 5;
+
     private int canal;
     private int volumen;
 
     public Televisor() {
-        canal = 1;
-        volumen = 5;
+        canal = DEF_CANAL;
+        volumen = DEF_VOLUMEN;
     }
 
     public Televisor(int canal, int volumen) {
@@ -39,7 +42,7 @@ public class Televisor {
             canal++;
         }
 
-        System.out.println("Canal cambiado a: " + canal);
+        System.out.println("Canal: " + canal);
     }
 
     public void bajarCanal() {
@@ -49,6 +52,22 @@ public class Televisor {
         else {
             canal--;
         }
-        System.out.println("Canal cambiado a: " + canal);
+        System.out.println("Canal: " + canal);
+    }
+
+    public void subirVolumen() {
+        if (volumen < 100) {
+            volumen++;
+        }
+
+        System.out.println("Volumen: " + volumen);
+    }
+
+    public void bajarVolumen() {
+        if (volumen > 0) {
+            volumen--;
+        }
+
+        System.out.println("Volumen: " + volumen);
     }
 }
