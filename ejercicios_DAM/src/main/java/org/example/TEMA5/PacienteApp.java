@@ -39,12 +39,13 @@ public class PacienteApp {
 
         joaquin.setNombre(nombre);
         joaquin.setEdad(edad);
-        joaquin.setSexo(sexo);
         joaquin.setPeso(peso);
         joaquin.setAltura(altura);
         joaquin.imprimirPaciente();
         System.out.println(joaquin.calcularIMC());
         System.out.println(joaquin.esMayorDeEdad());
+
+        System.out.println(jacobo);
     }
 
 }

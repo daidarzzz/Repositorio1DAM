@@ -1,5 +1,7 @@
 package org.example.TEMA5;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Random;
 
 public class Paciente {
@@ -24,7 +26,7 @@ public class Paciente {
     public Paciente(String nombre, int edad, char sexo, double peso, int altura) {
         this.nombre = nombre;
         this.edad = edad;
-        this.sexo = validarGenero(sexo);
+        setSexo(sexo);
         dni = generarDNI();
         this.peso = peso;
         this.altura = altura;
@@ -128,17 +130,14 @@ public class Paciente {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
+    private void setSexo(char sexo) {
+        this.sexo = validarGenero(sexo);
     }
 
     public String getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
 
     public int getEdad() {
         return edad;
@@ -154,6 +153,13 @@ public class Paciente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Paciente [Nombre: " + nombre + " Edad: " + edad + " DNI: " + dni + " Genero: " + sexo + " Peso: " + peso + " Altura: " + altura + "]";
+
     }
 
 }
