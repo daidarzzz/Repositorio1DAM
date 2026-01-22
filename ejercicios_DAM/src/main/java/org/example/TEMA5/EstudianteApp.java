@@ -20,6 +20,26 @@ public class EstudianteApp {
 
         System.out.println(Estudiante.validarCorreo("patri@mutxamel.com"));
         System.out.println(Estudiante.validarCorreo("davandrod2@alu.edu.gva.es"));
+
+        Libro divina_comedia = new Libro("Divina Comedia", "Cristiano Ronaldo");
+        System.out.println(divina_comedia.toString());
+        System.out.println(        divina_comedia.estaDisponible());
+
+        divina_comedia.prestar(jacobo);
+
+        System.out.println(divina_comedia);
+        System.out.println("Libros disponibles: " + Libro.getLibrosDisponibles());
+
+        System.out.println(        divina_comedia.estaDisponible());
+
+        divina_comedia.devolver();
+        System.out.println(divina_comedia);
+
+        System.out.println("Libros disponibles: " + Libro.getLibrosDisponibles());
+        System.out.println("Libros totales: " + Libro.getTotalLibros());
+
+
+
     }
 
 }

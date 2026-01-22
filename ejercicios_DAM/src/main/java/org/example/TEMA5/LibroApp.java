@@ -10,8 +10,8 @@ public class LibroApp {
 
         System.out.println("Total de libros creados: " + Libro.getTotalLibros());
         System.out.println("Libros disponibles: " + Libro.getLibrosDisponibles());
-        prueba.prestar();
-        prueba.prestar();
+//        prueba.prestar();
+//        prueba.prestar();
         System.out.println("Libros disponibles después del préstamo: " + Libro.getLibrosDisponibles());
         prueba.devolver();
         prueba.devolver();

@@ -10,12 +10,14 @@ public class Estudiante {
     private String curso;
     private int nia;
     private String email;
+    private Libro libro;
 
     public Estudiante(String nombre, String curso, String email) {
         this.nombre = nombre;
         this.curso = curso;
         this.email = email;
         setNia();
+        libro = null;
     }
 
     public Estudiante(String nombre) {
@@ -69,6 +71,13 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
 
     @Override
     public String toString() {
@@ -77,6 +86,7 @@ public class Estudiante {
                 ", curso='" + curso + '\'' +
                 ", nia=" + nia +
                 ", email='" + email + '\'' +
+                ", libro=" + libro +
                 '}';
     }
 
