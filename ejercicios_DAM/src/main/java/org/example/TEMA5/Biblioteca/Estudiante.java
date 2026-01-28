@@ -1,4 +1,6 @@
-package org.example.TEMA5;
+package org.example.TEMA5.Biblioteca;
+
+import java.util.ArrayList;
 
 public class Estudiante {
 
@@ -10,18 +12,26 @@ public class Estudiante {
     private String curso;
     private int nia;
     private String email;
-    private Libro libro;
+    private ArrayList<Libro> listalibros;
 
     public Estudiante(String nombre, String curso, String email) {
         this.nombre = nombre;
         this.curso = curso;
         this.email = email;
         setNia();
-        libro = null;
+        listalibros = new ArrayList<>();
     }
 
     public Estudiante(String nombre) {
         this(nombre, "", "");
+    }
+
+    public void insertarLibro (Libro libro) {
+        listalibros.add(libro);
+    }
+
+    public void borrarLibro (Libro libro) {
+        listalibros.remove(libro);
     }
 
     public static int obtenerTotalEstudiantes() {
@@ -71,12 +81,12 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
-    public Libro getLibro() {
-        return libro;
+    public ArrayList<Libro> getListaLibros() {
+        return listalibros;
     }
 
-    public void setLibro(Libro libro) {
-        this.libro = libro;
+    public void setListaLibros(ArrayList<Libro> listalibros) {
+        this.listalibros = listalibros;
     }
 
     @Override
@@ -86,7 +96,7 @@ public class Estudiante {
                 ", curso='" + curso + '\'' +
                 ", nia=" + nia +
                 ", email='" + email + '\'' +
-                ", libro=" + libro +
+                //", libros=" + listalibros +
                 '}';
     }
 

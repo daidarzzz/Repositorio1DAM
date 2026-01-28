@@ -1,4 +1,4 @@
-package org.example.TEMA5;
+package org.example.TEMA5.Biblioteca;
 
 public class Libro {
 
@@ -14,18 +14,26 @@ public class Libro {
     private String id;
     private boolean disponible;
     private Estudiante estudiantePrestado;
+    private Editorial editorial;
 
 
-
-    public Libro (String titulo, String autor) {
+    public Libro (String titulo, String autor, Editorial editorial) {
 
         this.titulo = titulo;
         this.autor = autor;
         disponible = true;
         id = calcularId();
         estudiantePrestado = null;
+
+        editorial.insertarLibro(this);
+
         librosDisponibles++;
 
+    }
+
+    public Libro (String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
     }
 
     public boolean isDisponible() {
@@ -57,23 +65,39 @@ public class Libro {
         this.titulo = titulo;
     }
 
+    public Editorial getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(Editorial editorial) {
+        this.editorial = editorial;
+    }
+
     private String calcularId() {
         return NOMBRE_ID + (++cantidadLibros);
     }
 
-    public void prestar(Estudiante estudiante) {
+    public Prestamo prestar(Estudiante estudiante) {
 
-        if (!disponible) {
-            System.out.println("El libro no está disponible.");
-        }
-        else {
+
+        Prestamo prestamo = null;
+
+        if (disponible && !estudiante.getListaLibros().contains(this)) {
             disponible = false;
             System.out.println("El libro '" + titulo + "'ha sido prestado con éxito a " + estudiante.getNombre() + " de " + estudiante.getCurso());
             librosDisponibles--;
             estudiantePrestado = estudiante;
-            estudiante.setLibro(this);
-
+            estudiante.insertarLibro(this);
+            prestamo = new Prestamo(this, estudiante);
+            System.out.println("Préstamo realizado con éxito.");
         }
+        else if (estudiante.getListaLibros().contains(this)) {
+            System.out.println("El estudiante " + estudiante.getNombre() + " ya tiene ese libro prestado.");
+        } else {
+            System.out.println("El libro no está disponible.");
+        }
+
+        return prestamo;
 
 
     }
@@ -85,7 +109,7 @@ public class Libro {
             disponible = true;
             System.out.println("El libro '" + titulo + "'ha sido devuelto con éxito por " + estudiantePrestado.getNombre() + " de " + estudiantePrestado.getCurso());
             librosDisponibles++;
-            estudiantePrestado.setLibro(null);
+            estudiantePrestado.borrarLibro(this);
             estudiantePrestado = null;
         }
     }
@@ -121,8 +145,11 @@ public class Libro {
                 ", id='" + id + '\'' +
                 ", disponible=" + disponible +
                 ", estudiantePrestado=" + estudiantePrestado +
+                //", editorial=" + editorial.getNombre() +
                 '}';
     }
+
+
 
 
 }
