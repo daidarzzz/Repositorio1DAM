@@ -11,6 +11,9 @@
 ### 1. Intro
 
 ### 2. Estructura de clases
+  - Diagrama de clases UML
+  - Código de PlantUML
+  - Cotnenido de las clases (java)
 
 ### 3. Programa Principal
 
