@@ -124,6 +124,8 @@ package org.example.TEMA5.Biblioteca {
 #### Contenido de las clases (java)
 
   - Clase **cadena.java**
+> [Link al archivo](https://github.com/daidarzzz/Repositorio1DAM/blob/75364e5263c0f6cfb921269f7932471facedaa81/ejercicios_DAM/src/main/java/org/example/TEMA5/PRACTICA1/Cadena.java)
+
 ````
 package org.example.TEMA5.PRACTICA1;
 
@@ -170,7 +172,6 @@ public class Cadena {
     }
 }
 ````
-> [Link al archivo](https://github.com/daidarzzz/Repositorio1DAM/blob/75364e5263c0f6cfb921269f7932471facedaa81/ejercicios_DAM/src/main/java/org/example/TEMA5/PRACTICA1/Cadena.java)
 
 ### 3. Programa Principal
 
