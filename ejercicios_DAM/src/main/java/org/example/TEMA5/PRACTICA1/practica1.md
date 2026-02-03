@@ -178,6 +178,6 @@ public class Cadena {
 ### 4. Pruebas
 
 ### 5. Entrega
-[X] Código fuente en GitHub: [link](../practica1/)
-[] Documentación
-[] Pruebas
+> [X] Código fuente en GitHub: [link](../practica1/)
+> [] Documentación
+> [] Pruebas
