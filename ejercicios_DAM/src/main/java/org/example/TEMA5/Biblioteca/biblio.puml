@@ -1,15 +1,88 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+package "org.example.TEMA5.Biblioteca" {
 
-autonumber
+    class Editorial {
+        - nombre : String
+        - pais : String
+        - listaLibros : List<Libro>
+        + Editorial(nombre:String, pais:String)
+        + Editorial()
+        + insertarLibro(libro:Libro)
+        + borrarLibro(libro:Libro)
+        + getNombre() : String
+        + setNombre(nombre:String)
+        + getPais() : String
+        + setPais(pais:String)
+        + toString() : String
+    }
 
-== Initialization ==
+    class Estudiante {
+        - nombre : String
+        - curso : String
+        - nia : int
+        - email : String
+        - listaLibros : List<Libro>
+        + Estudiante(nombre:String, curso:String, email:String)
+        + Estudiante(nombre:String)
+        + insertarLibro(libro:Libro)
+        + borrarLibro(libro:Libro)
+        + getEmail() : String
+        + setEmail(email:String)
+        + getNia() : int
+        + getCurso() : String
+        + setCurso(curso:String)
+        + getNombre() : String
+        + setNombre(nombre:String)
+        + getListaLibros() : List<Libro>
+        + setListaLibros(listaLibros:List<Libro>)
+        + toString() : String
+    }
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+    class Libro {
+        - titulo : String
+        - autor : String
+        - id : String
+        - disponible : boolean
+        - estudiantePrestado : Estudiante
+        - editorial : Editorial
+        + Libro(titulo:String, autor:String, editorial:Editorial)
+        + Libro(titulo:String, autor:String)
+        + isDisponible() : boolean
+        + setDisponible(disponible:boolean)
+        + getId() : String
+        + getAutor() : String
+        + setAutor(autor:String)
+        + getTitulo() : String
+        + setTitulo(titulo:String)
+        + getEditorial() : Editorial
+        + setEditorial(editorial:Editorial)
+        + prestar(estudiante:Estudiante) : Prestamo
+        + devolver()
+        + estaDisponible() : boolean
+        + getEstudiantePrestado() : Estudiante
+        + toString() : String
+    }
 
-== Repetition ==
+    class Prestamo {
+        - libro : Libro
+        - estudiante : Estudiante
+        - fecha : DateTime
+        + Prestamo(libro:Libro, estudiante:Estudiante)
+        + getLibro() : Libro
+        + setLibro(libro:Libro)
+        + getEstudiante() : Estudiante
+        + setEstudiante(estudiante:Estudiante)
+        + getFecha() : DateTime
+        + setFecha(fecha:DateTime)
+        + toString() : String
+    }
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+    ' Relaciones
+    Editorial "1" o-- "*" Libro : publica
+    Estudiante "1" o-- "*" Libro : posee
+    Libro "1" -- "0..1" Estudiante : prestado_a
+    Libro "1" --> "1" Editorial : pertenece_a
+    Prestamo "1" --> "1" Libro
+    Prestamo "1" --> "1" Estudiante
+}
 @enduml
