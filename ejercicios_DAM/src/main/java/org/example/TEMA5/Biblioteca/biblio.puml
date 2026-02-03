@@ -1,88 +1,100 @@
 @startuml
-package "org.example.TEMA5.Biblioteca" {
+package org.example.TEMA5.Biblioteca {
 
     class Editorial {
-        - nombre : String
-        - pais : String
-        - listaLibros : List<Libro>
+        - String nombre
+        - String pais
+        - ArrayList<Libro> listaLibros
         + Editorial(nombre:String, pais:String)
         + Editorial()
         + insertarLibro(libro:Libro)
         + borrarLibro(libro:Libro)
-        + getNombre() : String
+        + getNombre():String
         + setNombre(nombre:String)
-        + getPais() : String
+        + getPais():String
         + setPais(pais:String)
-        + toString() : String
+        + toString():String
     }
 
     class Estudiante {
-        - nombre : String
-        - curso : String
-        - nia : int
-        - email : String
-        - listaLibros : List<Libro>
+        - static final String CORREO_FORMAT
+        - static int contadorEstudiantes
+        - String nombre
+        - String curso
+        - int nia
+        - String email
+        - ArrayList<Libro> listalibros
         + Estudiante(nombre:String, curso:String, email:String)
         + Estudiante(nombre:String)
         + insertarLibro(libro:Libro)
         + borrarLibro(libro:Libro)
-        + getEmail() : String
+        + static obtenerTotalEstudiantes():int
+        + static validarCorreo(email:String):boolean
+        + getEmail():String
         + setEmail(email:String)
-        + getNia() : int
-        + getCurso() : String
+        + getNia():int
+        - setNia()
+        + getCurso():String
         + setCurso(curso:String)
-        + getNombre() : String
+        + getNombre():String
         + setNombre(nombre:String)
-        + getListaLibros() : List<Libro>
-        + setListaLibros(listaLibros:List<Libro>)
-        + toString() : String
+        + getListaLibros():ArrayList<Libro>
+        + setListaLibros(listalibros:ArrayList<Libro>)
+        + toString():String
     }
 
     class Libro {
-        - titulo : String
-        - autor : String
-        - id : String
-        - disponible : boolean
-        - estudiantePrestado : Estudiante
-        - editorial : Editorial
+        - static final String NOMBRE_ID
+        - static int cantidadLibros
+        - static int librosDisponibles
+        - String titulo
+        - String autor
+        - String id
+        - boolean disponible
+        - Estudiante estudiantePrestado
+        - Editorial editorial
         + Libro(titulo:String, autor:String, editorial:Editorial)
         + Libro(titulo:String, autor:String)
-        + isDisponible() : boolean
+        + isDisponible():boolean
         + setDisponible(disponible:boolean)
-        + getId() : String
-        + getAutor() : String
+        + getId():String
+        + getAutor():String
         + setAutor(autor:String)
-        + getTitulo() : String
+        + getTitulo():String
         + setTitulo(titulo:String)
-        + getEditorial() : Editorial
+        + getEditorial():Editorial
         + setEditorial(editorial:Editorial)
-        + prestar(estudiante:Estudiante) : Prestamo
+        - calcularId():String
+        + prestar(estudiante:Estudiante):Prestamo
         + devolver()
-        + estaDisponible() : boolean
-        + getEstudiantePrestado() : Estudiante
-        + toString() : String
+        + estaDisponible():boolean
+        + static getTotalLibros():int
+        + static getLibrosDisponibles():int
+        + getEstudiantePrestado():Estudiante
+        + toString():String
     }
 
     class Prestamo {
-        - libro : Libro
-        - estudiante : Estudiante
-        - fecha : DateTime
+        - Libro libro
+        - Estudiante estudiante
+        - LocalDateTime fecha
         + Prestamo(libro:Libro, estudiante:Estudiante)
-        + getLibro() : Libro
+        + getLibro():Libro
         + setLibro(libro:Libro)
-        + getEstudiante() : Estudiante
+        + getEstudiante():Estudiante
         + setEstudiante(estudiante:Estudiante)
-        + getFecha() : DateTime
-        + setFecha(fecha:DateTime)
-        + toString() : String
+        + getFecha():LocalDateTime
+        + setFecha(fecha:LocalDateTime)
+        + toString():String
     }
 
     ' Relaciones
-    Editorial "1" o-- "*" Libro : publica
-    Estudiante "1" o-- "*" Libro : posee
-    Libro "1" -- "0..1" Estudiante : prestado_a
-    Libro "1" --> "1" Editorial : pertenece_a
-    Prestamo "1" --> "1" Libro
-    Prestamo "1" --> "1" Estudiante
+    Editorial "1" -- "*" Libro : publica
+    Estudiante "1" -- "*" Libro : tiene
+    Libro "1" -- "0..1" Estudiante : prestado a
+    Libro "1" -- "1" Editorial : pertenece a
+    Prestamo "1" -- "1" Libro
+    Prestamo "1" -- "1" Estudiante
+
 }
 @enduml
