@@ -13,7 +13,7 @@
 
 ### 2. Estructura de clases
 #### Diagrama de clases UML
-![]()
+![](./img/clippy.gif)
 #### Código de PlantUML
 #### Contenido de las clases (java)
 
