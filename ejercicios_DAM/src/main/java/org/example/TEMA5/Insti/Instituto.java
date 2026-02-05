@@ -41,6 +41,10 @@ public class Instituto {
     }
 
     public void agregarCurso(Curso curso) {
+        if (curso == null) {
+            System.out.println("No puedes añadir un estudiante null");
+            return;
+        }
         if (!listaCursos.contains(curso)) {
             listaCursos.add(curso);
         } else {
@@ -49,6 +53,11 @@ public class Instituto {
     }
 
     public void agregarEstudiante(Estudiante estudiante) {
+        if (estudiante == null) {
+            System.out.println("No puedes añadir un estudiante null");
+            return;
+        }
+
         if (!listaEstudiantes.contains(estudiante)) {
             listaEstudiantes.add(estudiante);
         } else {

@@ -14,7 +14,7 @@ public class Empleado {
         id = generarID();
         this.nombre = nombre;
         this.cargo = cargo;
-        this.director = null;
+        director = null;
 
 
     }
