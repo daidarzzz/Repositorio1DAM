@@ -2,14 +2,20 @@
 
 
 ## ÍNDICE 
-1. [Intro](#2-estructura-de-clases)
+1. [Intro](#1-intro)
 2. [Estructura de clases](#2-estructura-de-clases)
 3. [Programa principal](#3-programa-principal)
 4. [Pruebas](#4-pruebas)
 5. [Entrega](#5-entrega)
 
 ### 1. Intro
-> La práctica consiste en una app ...
+> En esta práctica deberemos de realizar varias clases para poder usar una App (AppProgramas) en la que gestionaremos cadenas, programas, empleados, invitados…
+Cada uno de los mencionados anteriormente es una clase:
+•	Cadena es la cadena de televisión que contiene programas
+•	Programa es la clase donde creas objetos Programa, cada programa pertenece a una cadena, y en el futuro, puede cambiar de cadena. Cada programa tiene sus invitados y empleados, estos son dependientes del programa, por lo que, si el programa desaparece, los otros también lo harán. Empleado e invitado se crean dentro de la clase Programa a partir de unos métodos.
+•	Empleado es una clase usada para crear un empleado de un programa, tiene una ID generada por un método, nombre, cargo (que debe ser un cargo contemplado o pte) y director, que será siempre el director del programa al que pertenece.
+•	Invitado es una clase que corresponde al invitado de un programa, un invitado tiene nombre, profesión, fecha de visita (que se asignará mediante un método), y temporada en la que aparece.
+
 
 ### 2. Estructura de clases
 #### Diagrama de clases UML
@@ -179,5 +185,5 @@ public class Cadena {
 
 ### 5. Entrega
 - [X] Código fuente en GitHub: [link](../practica1/)
-- [ ] Documentación
-- [ ] Pruebas
+- [X] Documentación
+- [X] Pruebas
