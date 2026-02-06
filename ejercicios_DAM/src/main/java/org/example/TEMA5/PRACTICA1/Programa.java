@@ -287,7 +287,7 @@ public class Programa {
 
 
 
-    //ToString básico
+    //ToString básico, a director le ponemos .getNombre
 
     @Override
     public String toString() {
