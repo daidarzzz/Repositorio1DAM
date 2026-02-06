@@ -56,6 +56,7 @@ public class Programa {
     //Método que se encarga de crear un invitado para el programa correspondiente, recibe el nombre, la profesión y la temporada en la que aparece
     public void insertarInvitado(String nombre, String profesion, int temporada) {
         //Creamos al invitado con los parámetros recibidos.
+
         Invitado invitado = new Invitado(nombre, profesion, temporada);
 
         listaInvitados.add(invitado); //Lo añadimos a la lista de invitados

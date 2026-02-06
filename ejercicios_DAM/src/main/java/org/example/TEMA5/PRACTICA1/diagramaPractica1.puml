@@ -1,0 +1,78 @@
+@startuml
+
+package org.example.TEMA5.PRACTICA1 {
+
+    class Cadena {
+        - nombre: String
+        - listaProgramas: ArrayList<Programa>
+        + añadirPrograma(prog: Programa)
+        + getNombre(): String
+        + setNombre(nombre: String)
+        + getListaProgramas(): ArrayList<Programa>
+    }
+
+    class Programa {
+        - nombre: String
+        - cadena: Cadena
+        - temporadas: int
+        - listaEmpleados: ArrayList<Empleado>
+        - listaInvitados: ArrayList<Invitado>
+        - director: Empleado
+        + insertarEmpleado(nombre: String, cargo: String)
+        + crearDirector(director: String): Empleado
+        + insertarInvitado(nombre: String, profesion: String, temporada: int)
+        + cambiarCadena(cadena: Cadena)
+        + invitadosTemporada(temporada: int)
+        + vecesInvitado(nombre: String): int
+        + rastrearInvitado(nombre: String)
+        + buscarInvitado(nombre: String, programa: Programa): boolean
+        + invitadoAntes(nombre: String, segundoPrograma: Programa)
+    }
+
+    class Empleado {
+        - id: String
+        - nombre: String
+        - cargo: String
+        - director: Empleado
+        + getNombre(): String
+        + setNombre(nombre: String)
+        + getCargo(): String
+        + setCargo(cargo: String)
+        + getDirector(): Empleado
+        + setDirector(director: Empleado)
+    }
+
+    class Invitado {
+        - nombre: String
+        - profesion: String
+        - fecha_visita: LocalDate
+        - temporada: int
+        + getNombre(): String
+        + setNombre(nombre: String)
+        + getProfesion(): String
+        + setProfesion(profesion: String)
+        + getFecha_visita(): LocalDate
+        + setFecha_visita(): LocalDate
+        + getTemporada(): int
+        + setTemporada(temporada: int)
+    }
+
+    ' Relaciones
+
+    ' Cadena ↔ Programa (asociación bidireccional)
+    Cadena "1" o-- "*" Programa : contiene
+    Programa --> "1" Cadena : pertenece_a
+
+    ' Programa → Empleado / Invitado (composición)
+    Programa "1" *-- "*" Empleado : empleados
+    Programa "1" *-- "*" Invitado : invitados
+
+    ' Programa → director (Empleado)
+    Programa "1" --> "1" Empleado : director
+
+    ' Empleado → director (si no es director)
+    Empleado "0..1" --> "1" Empleado : director
+}
+
+@enduml
+
