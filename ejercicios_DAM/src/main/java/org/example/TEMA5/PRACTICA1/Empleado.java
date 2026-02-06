@@ -1,7 +1,11 @@
 package org.example.TEMA5.PRACTICA1;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Empleado {
 
+    static String[] cargosDisponibles = {"director", "tecnico", "presentador", "colaborador"};
     static int numEmpleados = 0;
 
     private String id;
@@ -9,19 +13,39 @@ public class Empleado {
     private String cargo;
     private Empleado director;
 
+    public Empleado(String nombre, String cargo, Empleado director) {
+
+        id = generarID();
+        this.nombre = nombre;
+        this.cargo = validarCargo(cargo);
+        this.director = director;
+
+    }
     public Empleado(String nombre, String cargo) {
 
         id = generarID();
         this.nombre = nombre;
-        this.cargo = cargo;
+        this.cargo = validarCargo(cargo);
         director = null;
 
-
     }
+
 
     public String generarID() {
 
         return "EP" + (++numEmpleados);
+
+    }
+
+    public String validarCargo(String cargo) {
+
+        if (Arrays.asList(cargosDisponibles).contains(cargo.toLowerCase())) {
+
+            return cargo.toLowerCase();
+
+        } else {
+            return "pte";
+        }
 
     }
 

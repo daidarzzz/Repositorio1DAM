@@ -16,6 +16,7 @@ public class Cadena {
 
     public void añadirPrograma(Programa programa) {
         listaProgramas.add(programa);
+        programa.setCadena(this);
     }
 
     public String getNombre() {

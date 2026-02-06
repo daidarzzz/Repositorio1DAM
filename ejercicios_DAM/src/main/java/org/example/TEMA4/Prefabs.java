@@ -7,10 +7,6 @@ public class Prefabs {
     private static Scanner read = new Scanner(System.in);
 
 
-    static void main(String[] args) {
-        menu("Ocho", "xd", "hola");
-    }
-
     public static int pedirEntero(String texto) {
         int num = 0;
         boolean seguir = true;
