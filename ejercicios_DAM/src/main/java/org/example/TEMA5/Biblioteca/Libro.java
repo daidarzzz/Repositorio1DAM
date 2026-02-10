@@ -24,9 +24,7 @@ public class Libro {
         disponible = true;
         id = calcularId();
         estudiantePrestado = null;
-
         editorial.insertarLibro(this);
-
         librosDisponibles++;
 
     }
