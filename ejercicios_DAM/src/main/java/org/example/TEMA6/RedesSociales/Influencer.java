@@ -15,10 +15,6 @@ public class Influencer extends Usuario{
         return colaboraciones;
     }
 
-    public void setColaboraciones(ArrayList<String> colaboraciones) {
-        this.colaboraciones = colaboraciones;
-    }
-
     public void insertarColaboracion(String colaboracion) {
         this.colaboraciones.add(colaboracion);
     }
@@ -29,7 +25,7 @@ public class Influencer extends Usuario{
         super.mostrarInfo();
         System.out.println("Lista de colaboraciones de " + super.getNombre() + ": ");
         for (String colaboracion : colaboraciones) {
-            System.out.println("[*] " + colaboracion);
+            System.out.println("\t [*] " + colaboracion);
         }
 
     }

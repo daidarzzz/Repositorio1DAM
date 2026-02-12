@@ -1,0 +1,31 @@
+@startuml
+
+package org.example.TEMA6.PolimorfismoEj2 {
+
+    class Empleado {
+        +Empleado()
+        +realizarTarea() : void
+    }
+
+    class Desarrollador {
+        +Desarrollador()
+        +realizarTarea() : void
+    }
+
+    class Diseñador {
+        +Diseñador()
+        +realizarTarea() : void
+    }
+
+    class Gerente {
+        +Gerente()
+        +realizarTarea() : void
+    }
+
+    Empleado <|-- Desarrollador
+    Empleado <|-- Diseñador
+    Empleado <|-- Gerente
+
+}
+
+@enduml
