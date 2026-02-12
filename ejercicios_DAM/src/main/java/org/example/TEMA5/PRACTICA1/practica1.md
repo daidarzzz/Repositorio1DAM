@@ -766,6 +766,27 @@ public class AppProgramas {
 
 ### 4. Pruebas
 
+#### 1. Crear cadena, programa, y empleados (Uno de ellos con un cargo no contemplado)
+![](./img/main-1.png)
+![](./img/sol-1.png)
+
+#### 2.	Crear invitados y ver a qué programa fueron primero (uno de ellos no fue a uno de los programas) y ver las temporadas en las que estuvo Pepe en el programa joaquinTartas:
+![](./img/main-2.png)
+![](./img/sol-2.png)
+
+#### 3.	Ver cuantas veces fue Pepe a JoaquinTartas:
+![](./img/main-3.png)
+![](./img/sol-3.png)
+
+#### 4. Insertar entero mal en fecha:
+> (Mismo main que el 3)
+> 
+![](./img/sol-4.png)
+
+
+#### 5. Main del PDF adaptado: 
+![](./img/main-5.png)
+![](./img/sol-5.png)
 
 
 ### 5. Entrega
