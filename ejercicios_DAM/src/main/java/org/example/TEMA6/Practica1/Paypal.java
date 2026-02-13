@@ -17,12 +17,24 @@ public class Paypal extends MetodoPago{
         System.out.println("Procesando pago de " + importe + "€ con PayPal");
     }
 
-    public void validarPaypal(double pago) {
+    public boolean validarPaypal() {
 
-        boolean paypalValido = true;
+        if (!cuenta.equals("falso")) return true;
+        else return false;
 
-        if (!cuenta.matches("")) paypalValido = false;
-        else if (pago > saldo) paypalValido = false;
+        //if (!cuenta.matches("")) paypalValido = false;
+
+    }
+
+    public boolean saldoSuficiente() {
+
+        System.out.println("Introduce el importe: ");
+        double importe = Tienda.read.nextDouble();
+
+        if (importe > saldo) return false;
+        else {
+            return true;
+        }
     }
 
 

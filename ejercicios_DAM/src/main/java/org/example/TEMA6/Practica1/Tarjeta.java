@@ -27,7 +27,7 @@ public class Tarjeta extends MetodoPago{
         boolean tarjetaValida = true;
 
        // if (nre_tarjeta.length() != 16) tarjetaValida = false;
-        if (nre_tarjeta.length() != 4) tarjetaValida = false;
+        if (nre_tarjeta != null && nre_tarjeta.matches("\\d{16}")) tarjetaValida = false;
         if (!Arrays.asList(tiposTarjeta).contains(tipo.toUpperCase())) tarjetaValida = false;
 
         return tarjetaValida;

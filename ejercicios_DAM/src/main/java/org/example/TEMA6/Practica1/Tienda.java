@@ -16,6 +16,13 @@ public class Tienda {
         switchMetodos(metodo);
     }
 
+    public static void introducirImporte() {
+
+//        System.out.println("Introduce el importe a pagar: ");
+//        double importe = read.nextDouble();
+
+    }
+
     public static void realizarPago(MetodoPago metodo) {
         System.out.println("Introduce el importe a pagar: ");
         double importe = read.nextDouble();
@@ -31,7 +38,18 @@ public class Tienda {
         switch (metodo) {
 
             case "paypal":
-
+                System.out.println("Introduce tu cuenta de PayPal: ");
+                String cuenta = read.next();
+                Paypal paypal = new Paypal(cuenta);
+                System.out.println("Validando cuenta de PayPal...");
+                if (!paypal.validarPaypal()) System.out.println("Los datos de tu cuenta de PayPal no son correctos.");
+                else {
+                    System.out.println("Cuenta válida.");
+                    if (!paypal.saldoSuficiente()) System.out.println("Tu cuenta no tiene saldo suficiente para esta operación.");
+                    else {
+                        realizarPago(paypal);
+                    }
+                }
                 break;
             case "tarjeta":
                 System.out.println("Introduce los datos de tu tarjeta: ");
@@ -54,6 +72,7 @@ public class Tienda {
                 System.out.println("[pista] " + bizum.getPin());
                 int pin = read.nextInt();
                 boolean bizumValido = bizum.validarBizum(pin);
+                System.out.println("Validando bizum...");
                 if (!bizumValido) System.out.println("Los datos de tu Bizum no son correctos.");
                 else realizarPago(bizum);
                 break;
