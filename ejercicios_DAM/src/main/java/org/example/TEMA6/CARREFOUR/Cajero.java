@@ -34,6 +34,11 @@ public class Cajero extends Persona{
     }
 
     @Override
+    public void trabajar() {
+        System.out.println("Cobrando a un cliente...");
+    }
+
+    @Override
     public String toString() {
         return "Cajero{" +
                 "caja=" + caja +

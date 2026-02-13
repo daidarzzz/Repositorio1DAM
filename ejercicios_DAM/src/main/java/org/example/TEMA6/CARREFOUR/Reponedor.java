@@ -34,6 +34,11 @@ public class Reponedor extends Persona{
     }
 
     @Override
+    public void trabajar() {
+        System.out.println("Recogiendo cajas...");
+    }
+
+    @Override
     public String toString() {
         return "Reponedor{" +
                 "pasillo=" + pasillo +

@@ -9,12 +9,14 @@ public class EmpleadosApp {
         Cajero jorge = new Cajero(147, "Jorge", 1800);
 
         jorge.mostrarInfo();
+        Reponedor joaquin = new Reponedor(122, "Joaquin", 10);
 
         Seguridad juan = new Seguridad(123, "Juan", 2000, "Joaquin Milk", "Manzana", "Carlos", "Navaja");
 
         juan.mostrarInfo();
 
         Persona manuel = new Cajero(1232, "Manuel", 2000);
+
 
         ArrayList<Persona> listaEmpleados = new ArrayList<>();
 
@@ -31,6 +33,11 @@ public class EmpleadosApp {
 
         fichar(manuel);
         fichar(juan);
+
+        jorge.trabajar();
+        joaquin.trabajar();
+        juan.trabajar();
+
 
     }
 
