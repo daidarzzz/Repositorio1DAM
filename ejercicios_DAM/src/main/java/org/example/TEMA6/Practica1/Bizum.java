@@ -26,11 +26,12 @@ public class Bizum extends MetodoPago{
     @Override
     public void procesarPago(double importe) {
         System.out.println("Procesando pago de " + importe + " € con Bizum");
+        System.out.println("Pago aceptado, muchas gracias.");
     }
 
     public boolean validarBizum(int pin) {
 
-        //if (!telefono.matches("")) return false;
+        if (!telefono.matches("\\d{9}")) return false;
         if (pin != this.pin) return false;
         return true;
 

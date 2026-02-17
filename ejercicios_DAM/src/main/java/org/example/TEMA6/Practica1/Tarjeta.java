@@ -1,18 +1,17 @@
 package org.example.TEMA6.Practica1;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Tarjeta extends MetodoPago{
 
     final String[] tiposTarjeta = {"VISA", "MASTERCARD", "MAESTRO"};
 
-    private String nre_tarjeta;
+    private String nro_tarjeta;
     private String tipo;
 
 
-    public Tarjeta(String nre_tarjeta, String tipo) {
-        this.nre_tarjeta = nre_tarjeta;
+    public Tarjeta(String nro_tarjeta, String tipo) {
+        this.nro_tarjeta = nro_tarjeta;
         this.tipo = tipo;
     }
 
@@ -20,14 +19,14 @@ public class Tarjeta extends MetodoPago{
     @Override
     public void procesarPago(double importe) {
         System.out.println("Procesando pago de " + importe + "€ con tarjeta de crédito " + tipo);
+        System.out.println("Pago aceptado, muchas gracias.");
     }
 
     public boolean validarTarjeta() {
 
         boolean tarjetaValida = true;
 
-       // if (nre_tarjeta.length() != 16) tarjetaValida = false;
-        if (nre_tarjeta != null && nre_tarjeta.matches("\\d{16}")) tarjetaValida = false;
+        if (nro_tarjeta == null || !nro_tarjeta.matches("\\d{16}")) tarjetaValida = false;
         if (!Arrays.asList(tiposTarjeta).contains(tipo.toUpperCase())) tarjetaValida = false;
 
         return tarjetaValida;

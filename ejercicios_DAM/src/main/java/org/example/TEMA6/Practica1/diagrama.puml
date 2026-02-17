@@ -1,0 +1,65 @@
+@startuml
+
+' Clase abstracta MetodoPago
+abstract class MetodoPago {
+    + {abstract} procesarPago(importe: double): void
+}
+
+' Clase Tarjeta
+class Tarjeta {
+    - {static} tiposTarjeta: String[] = {"VISA", "MASTERCARD", "MAESTRO"}
+    - nro_tarjeta: String
+    - tipo: String
+    + Tarjeta(nro_tarjeta: String, tipo: String)
+    + procesarPago(importe: double): void
+    + validarTarjeta(): boolean
+}
+
+' Clase Paypal
+class Paypal {
+    - cuenta: String
+    - saldo: double
+    + Paypal(cuenta: String)
+    + procesarPago(importe: double): void
+    + validarPaypal(importe: double): boolean
+    + saldoSuficiente(importe: double): boolean
+}
+
+' Clase Bizum
+class Bizum {
+    - {static} aleatorio: Random
+    - telefono: String
+    - pin: int
+    + Bizum(telefono: String)
+    - generarPin(): void
+    + procesarPago(importe: double): void
+    + validarBizum(pin: int): boolean
+}
+
+' Clase Tienda
+class Tienda {
+    - tiposDeMetodos: String[] = {"bizum", "paypal", "tarjeta"}
+    + {static} read: Scanner
+    + {static} iniciarPago(): void
+    + {static} realizarPago(metodo: MetodoPago): void
+    - {static} switchMetodos(metodo: String): void
+}
+
+' Clase AppEcommerce
+class AppEcommerce {
+    + {static} main(args: String[]): void
+}
+
+' Relaciones de herencia
+MetodoPago <|-- Tarjeta
+MetodoPago <|-- Paypal
+MetodoPago <|-- Bizum
+
+' Relaciones de uso/dependencia con cardinalidad correcta
+Tienda "1" ..> "1" MetodoPago : <<use>>
+Tienda "1" ..> "0..1" Tarjeta : <<create>>
+Tienda "1" ..> "0..1" Paypal : <<create>>
+Tienda "1" ..> "0..1" Bizum : <<create>>
+AppEcommerce "1" ..> "1" Tienda : <<use>>
+
+@enduml

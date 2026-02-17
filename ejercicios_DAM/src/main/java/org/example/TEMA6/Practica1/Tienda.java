@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Tienda {
 
-    final private String[] tiposDeMetodos = {"bizum", "paypal", "tarjeta"};
     public static Scanner read = new Scanner(System.in);
 
 
@@ -16,19 +15,12 @@ public class Tienda {
         switchMetodos(metodo);
     }
 
-    public static void introducirImporte() {
-
-//        System.out.println("Introduce el importe a pagar: ");
-//        double importe = read.nextDouble();
-
-    }
 
     public static void realizarPago(MetodoPago metodo) {
         System.out.println("Introduce el importe a pagar: ");
         double importe = read.nextDouble();
 
         metodo.procesarPago(importe);
-        System.out.println("Pago aceptado, muchas gracias.");
     }
 
     private static void switchMetodos(String metodo) {
@@ -45,20 +37,17 @@ public class Tienda {
                 if (!paypal.validarPaypal()) System.out.println("Los datos de tu cuenta de PayPal no son correctos.");
                 else {
                     System.out.println("Cuenta válida.");
-                    if (!paypal.saldoSuficiente()) System.out.println("Tu cuenta no tiene saldo suficiente para esta operación.");
-                    else {
-                        realizarPago(paypal);
-                    }
+                    realizarPago(paypal);
                 }
                 break;
             case "tarjeta":
                 System.out.println("Introduce los datos de tu tarjeta: ");
-                int numTarjeta = 0;
-                numTarjeta = read.nextInt();
+                String numTarjeta = "";
+                numTarjeta = read.next();
                 read.nextLine();
                 System.out.println("Selecciona el tipo de tarjeta [VISA, MASTERCARD, MAESTRO]");
                 String tipo = read.next();
-                Tarjeta tarjeta = new Tarjeta(Integer.toString(numTarjeta), tipo);
+                Tarjeta tarjeta = new Tarjeta(numTarjeta, tipo);
                 System.out.println("Validando tarjeta...");
                 boolean tarjetaValida = tarjeta.validarTarjeta();
                 if (!tarjetaValida) System.out.println("Los datos de tu tarjeta no son correctos.");

@@ -14,23 +14,24 @@ public class Paypal extends MetodoPago{
 
     @Override
     public void procesarPago(double importe) {
-        System.out.println("Procesando pago de " + importe + "€ con PayPal");
+
+        if (!saldoSuficiente(importe)) {
+            System.out.println("Error. No cuentas con suficiente saldo para realizar la operación.");
+        }
+        else {
+            System.out.println("Procesando pago de " + importe + "€ con PayPal");
+            System.out.println("Pago aceptado, muchas gracias.");
+        }
+
     }
 
     public boolean validarPaypal() {
 
-        if (!cuenta.equals("falso")) return true;
-        else return false;
-
-        //if (!cuenta.matches("")) paypalValido = false;
+        return cuenta.matches(".+@.+\\.com");
 
     }
 
-    public boolean saldoSuficiente() {
-
-        System.out.println("Introduce el importe: ");
-        double importe = Tienda.read.nextDouble();
-
+    public boolean saldoSuficiente(double importe) {
         if (importe > saldo) return false;
         else {
             return true;
