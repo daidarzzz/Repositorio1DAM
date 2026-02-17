@@ -1,4 +1,4 @@
-package org.example.TEMA6.Interfaces;
+package org.example.TEMA6.Interfaces.Prueba;
 
 public interface Ataques {
 
