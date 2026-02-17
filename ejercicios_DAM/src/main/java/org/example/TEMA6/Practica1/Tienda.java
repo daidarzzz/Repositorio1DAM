@@ -3,11 +3,27 @@ package org.example.TEMA6.Practica1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * Esta clase se encarga de gestionar toda la lógica, aquí se crean los objetos
+ * de los métodos de pago, se pide al usuario que introduzca parámetros, etc.
+ *
+ * No cuenta con atributos, solo tiene métodos.
+ *
+ * @author david
+ * @version 1.3
+ */
 public class Tienda {
 
     public static Scanner read = new Scanner(System.in);
 
 
+    /**
+     *
+     * Primer método que utilizará la AppEcommerce, te pregunta cuál es el método que
+     * vas a utilizar para el pago. Al introducirlo, pasas al método "switchMetodos".
+     *
+     */
     public static void iniciarPago() {
         System.out.println("¿Qué método de pago quieres usar? [Bizum, PayPal, Tarjeta]");
         String metodo = read.next();
@@ -15,7 +31,12 @@ public class Tienda {
         switchMetodos(metodo);
     }
 
-
+    /**
+     *
+     * Solicita al usuario que introduzca el importe de la operación
+     * Después, llama a procesarPago para continuar con el pago.
+     * @param metodo el metodo utilizado
+     */
     public static void realizarPago(MetodoPago metodo) {
         System.out.println("Introduce el importe a pagar: ");
         double importe = read.nextDouble();
@@ -23,6 +44,19 @@ public class Tienda {
         metodo.procesarPago(importe);
     }
 
+    /**
+     *
+     * Gestiona la lógica que tendrá cada método de pago elegido,
+     * cada método hará ciertas cosas, por ejemplo, en paypal te
+     * pedirá la cuenta, en tarjeta el número de la tarjeta, etc.
+     *
+     * Con cada método de pago, se llama a la función "validar" de
+     * cada método específico, para comprobar que has introducido
+     * correctamente los datos, en caso de ser así, se procederá a
+     * llamar al método "realizarPago", donde se completará el mismo.
+     *
+     * @param metodo el metodo utilizado por el usuario
+     */
     private static void switchMetodos(String metodo) {
 
 

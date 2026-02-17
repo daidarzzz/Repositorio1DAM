@@ -7,12 +7,16 @@ abstract class MetodoPago {
 
 ' Clase Tarjeta
 class Tarjeta {
-    - {static} tiposTarjeta: String[] = {"VISA", "MASTERCARD", "MAESTRO"}
+    - {static} tiposTarjeta: String[]
     - nro_tarjeta: String
     - tipo: String
     + Tarjeta(nro_tarjeta: String, tipo: String)
     + procesarPago(importe: double): void
     + validarTarjeta(): boolean
+    + getNro_tarjeta(): String
+    + setNro_tarjeta(nro_tarjeta: String): void
+    + getTipo(): String
+    + setTipo(tipo: String): void
 }
 
 ' Clase Paypal
@@ -21,8 +25,12 @@ class Paypal {
     - saldo: double
     + Paypal(cuenta: String)
     + procesarPago(importe: double): void
-    + validarPaypal(importe: double): boolean
+    + validarPaypal(): boolean
     + saldoSuficiente(importe: double): boolean
+    + getCuenta(): String
+    + setCuenta(cuenta: String): void
+    + getSaldo(): double
+    + setSaldo(saldo: double): void
 }
 
 ' Clase Bizum
@@ -34,11 +42,14 @@ class Bizum {
     - generarPin(): void
     + procesarPago(importe: double): void
     + validarBizum(pin: int): boolean
+    + getTelefono(): String
+    + setTelefono(telefono: String): void
+    + getPin(): int
+    + setPin(pin: int): void
 }
 
 ' Clase Tienda
 class Tienda {
-    - tiposDeMetodos: String[] = {"bizum", "paypal", "tarjeta"}
     + {static} read: Scanner
     + {static} iniciarPago(): void
     + {static} realizarPago(metodo: MetodoPago): void
@@ -50,16 +61,20 @@ class AppEcommerce {
     + {static} main(args: String[]): void
 }
 
-' Relaciones de herencia
+' ─── HERENCIA ───
 MetodoPago <|-- Tarjeta
 MetodoPago <|-- Paypal
 MetodoPago <|-- Bizum
 
-' Relaciones de uso/dependencia con cardinalidad correcta
-Tienda "1" ..> "1" MetodoPago : <<use>>
-Tienda "1" ..> "0..1" Tarjeta : <<create>>
-Tienda "1" ..> "0..1" Paypal : <<create>>
-Tienda "1" ..> "0..1" Bizum : <<create>>
+' ─── DEPENDENCIA: Tienda crea 0..1 de cada método ───
+Tienda "1" ..> "0..1" Tarjeta   : <<create>>
+Tienda "1" ..> "0..1" Paypal    : <<create>>
+Tienda "1" ..> "0..1" Bizum     : <<create>>
+
+' ─── USO POLIMÓRFICO: realizarPago recibe MetodoPago ───
+Tienda "1" ..> "1" MetodoPago   : <<use>>
+
+' ─── AppEcommerce inicia Tienda ───
 AppEcommerce "1" ..> "1" Tienda : <<use>>
 
 @enduml
