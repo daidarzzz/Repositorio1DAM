@@ -1,6 +1,6 @@
-# Práctica 1: Sistema de Pago para E-commerce
+# Práctica 1 - Sistema de Pago para E-commerce
 
-## 📋 Índice
+## Índice de contenido
 1. [Introducción](#introducción)
 2. [Objetivo de la práctica](#objetivo-de-la-práctica)
 3. [Conceptos de POO aplicados](#conceptos-de-poo-aplicados)
@@ -13,9 +13,16 @@
 
 ---
 
-## 🎯 Introducción
+## Introducción
 
-Este proyecto implementa un sistema de pagos para una tienda online de cursos de programación. El sistema permite procesar pagos mediante diferentes métodos: **Tarjeta de crédito**, **PayPal** y **Bizum**, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
+La práctica nos pide implementar un sistema de pagos para un ecommerce, tendremos 3 métodos de pago: Bizum, PayPal y Tarjeta de Crédito
+Los tres métodos de pago extienden de la clase “MetodoPago”, siendo esta la clase madre (y clase abstracta). Estos métodos aplican polimorfismo al método abstracto de la clase madre “procesarPago”.
+Con PayPal deberemos de validar que la cuenta tiene los parámetros correctos (chequear que introdujo bien el correo) y debemos de comprobar de que el saldo que tiene la cuenta no es menor al importe del pago que queremos realizar.
+Con Bizum, debemos de validar de que el número de teléfono ha sido introducido correctamente (9 números) y comprobar que el usuario introduce el pin correctamente.
+Con Tarjeta, la validación debe ser que introduzcas el número de la tarjeta correctamente (16 números) y que hayas seleccionado un tipo de tarjeta que esté contemplado (Visa, Mastercard, Maestro).
+
+Todo el proceso del pago se realizará en la clase “Tienda”, que es donde el usuario elige el método de pago, el importe a pagar, etc.
+
 
 ---
 
