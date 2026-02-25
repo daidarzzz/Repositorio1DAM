@@ -9,7 +9,7 @@ public class Entrenador extends BarcelonaFC implements AccionesDeportivas{
 
     public Entrenador(String nombre, int edad, String equipo, String formacionPreferida) {
         super(nombre, edad);
-        this.equipo = Equipos.valueOf(equipo);
+        this.equipo = Equipos.valueOf(equipo.toUpperCase());
         setFormacionPreferida(formacionPreferida);
     }
 
@@ -42,6 +42,7 @@ public class Entrenador extends BarcelonaFC implements AccionesDeportivas{
             }
         } catch (FormatoIncorrecto e) {
             System.out.println(e.getMessage());
+            this.formacionPreferida = null;
         }
 
     }

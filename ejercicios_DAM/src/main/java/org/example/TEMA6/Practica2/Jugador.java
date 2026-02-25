@@ -9,12 +9,20 @@ public class Jugador extends BarcelonaFC implements AccionesDeportivas{
     private Equipos categoria;
     private Integer dorsal;
     private Posiciones posicion;
-    private static ArrayList<Integer> listaDorsales = new ArrayList<>();
+    protected static ArrayList<Jugador> listaJugadores = new ArrayList<>();
     public Jugador(String nombre, int edad, String categoria, Integer dorsal, String posicion) {
         super(nombre, edad);
         this.categoria = Equipos.valueOf(categoria.toUpperCase());
-        setDorsal(dorsal);
+        this.dorsal = dorsal;
         this.posicion = Posiciones.valueOf(posicion.toUpperCase());
+        setDorsal(dorsal);
+    }
+
+    public static void mostrarListaJugadores() {
+        System.out.println("JUGADORES:");
+        for (Jugador jugador : listaJugadores) {
+            System.out.println("- " + jugador);
+        }
     }
 
     public void calentar() {
@@ -49,17 +57,26 @@ public class Jugador extends BarcelonaFC implements AccionesDeportivas{
     }
 
     public void setDorsal(Integer dorsal) {
+        boolean crearJugador = true;
         try {
-            if (listaDorsales.contains(dorsal)) {
-                throw new DorsalExistente("No puede haber más de un jugador con el mismo dorsal (" + nombre + " tiene un dorsal ya asignado a otro)");
-            } else {
-                this.dorsal = dorsal;
-                listaDorsales.add(dorsal);
+            if (listaJugadores.size() == 0) {
+                listaJugadores.add(this);
+                crearJugador = false;
+            }
+            for (Jugador jugador : listaJugadores) {
+                if (jugador == this) break;
+                if (jugador.getCategoria() == this.categoria && jugador.getDorsal() == this.dorsal) {
+                    throw new DorsalExistente("Ya hay un jugador de la categoría " + categoria + " con ese dorsal");
+                } else {
+                    this.dorsal = dorsal;
+                }
             }
         } catch (DorsalExistente e) {
             System.out.println(e.getMessage());
+            this.dorsal = null;
+            crearJugador = false;
         }
-
+        if (crearJugador) listaJugadores.add(this);
 
     }
 
