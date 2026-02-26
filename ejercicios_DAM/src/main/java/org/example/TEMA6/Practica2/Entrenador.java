@@ -38,7 +38,7 @@ public class Entrenador extends BarcelonaFC implements AccionesDeportivas{
             if (formacionPreferida.matches("\\d-\\d-\\d")) {
                 this.formacionPreferida = formacionPreferida;
             } else {
-                throw new FormatoIncorrecto("No has introducido el formato incorrecto (N-N-N)");
+                throw new FormatoIncorrecto("No has introducido el formato correcto (N-N-N)");
             }
         } catch (FormatoIncorrecto e) {
             System.out.println(e.getMessage());

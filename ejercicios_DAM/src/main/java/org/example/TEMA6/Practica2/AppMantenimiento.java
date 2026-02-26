@@ -31,11 +31,11 @@ public class AppMantenimiento {
 
         switch (opcion) {
             case '1':
-                mantenerEntrenador();
+                mantenerJugador();
                 break;
             case '2':
-                for (int i = 1; i < categoriasDisponibles.length; i++) {
-                    System.out.println(i + ". " + categoriasDisponibles[i]);
+                for (int i = 0; i < categoriasDisponibles.length; i++) {
+                    System.out.println((i+1) + ". " + categoriasDisponibles[i]);
                 }
                 System.out.print("Escribe la categoría que quieres ver: ");
                 Equipos equipo = Equipos.valueOf(read.next().toUpperCase());
@@ -59,7 +59,7 @@ public class AppMantenimiento {
     }
 
 
-    public static void mantenerEntrenador() {
+    public static void mantenerJugador() {
         System.out.println(" === MANTENIMIENTO DE JUGADORES ===");
         System.out.println();
         System.out.println("[1]. Añadir nuevo jugador");
@@ -78,17 +78,63 @@ public class AppMantenimiento {
                 System.out.println("Introduce los siguientes datos con el mismo formato indicado [nombre,edad,categoria,dorsal,posicion]: ");
                 String[] datosJugador = read.next().split(",");
                 Jugador nuevo = new Jugador(datosJugador[0], Integer.parseInt(datosJugador[1]), datosJugador[2], Integer.parseInt(datosJugador[3]), datosJugador[4]);
-                if (nuevo.getDorsal() >= 1) System.out.println("Jugador creado con éxito!!!");
+                if (Jugador.listaJugadores.contains(nuevo)) System.out.println("Jugador creado con éxito!!!");
                 break;
             case '2':
+                System.out.println(" === MANTENIMIENTO DE JUGADORES (Modificar datos de jugador existente) ===");
+                System.out.println();
+                System.out.println("¿De qué jugador quieres hacer cambios?");
+                Jugador.mostrarListaJugadores();
+                System.out.println("====================================");
+                System.out.print("Selecciona una opción --> ");
+                int escogido = read.nextInt()-1;
+                Jugador jugador = Jugador.listaJugadores.get(escogido);
+                System.out.println("Modificando jugador: " + jugador);
+                System.out.println("¿Qué quieres modificar? [nombre,edad,categoria,dorsal,posicion]:");
+                System.out.println("====================================");
+                System.out.print("Selecciona una opción --> ");
+                String opcionModificar = read.next();
+                System.out.println("====================================");
+                modificarJugadorSwitch(opcionModificar, jugador);
+
                 break;
             case '3':
+                System.out.println(" === MANTENIMIENTO DE JUGADORES (Crear Acompañante (Sólo senior) ===");
+                System.out.print("Introduce el nombre del acompañante: ");
+                String nombre = read.next();
+                System.out.print("Introduce su edad: ");
+                int edad = read.nextInt();
+                System.out.println("Selecciona el jugador al que quiera acompañar:");
+                Jugador.mostrarListaJugadores(Equipos.SENIOR);
+                System.out.print("Selecciona una opción --> ");
+                int opcionJugador = read.nextInt() -1;
+                read.nextLine();
+                System.out.print("Introduce el parentesco: ");
+                String parentesco = read.nextLine();
+                Acompanyante acompanyante = new Acompanyante(nombre, edad, Jugador.listaJugadores.get(opcionJugador), parentesco);
+                System.out.println("Acompañante creado con éxito!!!");
                 break;
             case 'x':
             case 'X':
                 System.out.println("ADIOS!!!");
                 return;
         }
+    }
+
+    public static void modificarJugadorSwitch(String opcion, Jugador jugador) {
+
+        switch (opcion.toLowerCase()) {
+
+            case "dorsal":
+                System.out.print("Nuevo dorsal -->");
+                int dorsal = read.nextInt();
+                int dorsalAntiguo = jugador.getDorsal();
+                jugador.setDorsal(dorsal);
+                if (dorsalAntiguo != jugador.getDorsal()) System.out.println("Dorsal cambiado con éxito!!!");
+                break;
+
+        }
+
     }
 
 

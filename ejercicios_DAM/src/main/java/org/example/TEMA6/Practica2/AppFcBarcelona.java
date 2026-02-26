@@ -7,7 +7,7 @@ public class AppFcBarcelona {
 
         System.out.println(joa);
 
-        Jugador jacobo = new Jugador("Jacobo", 82, "juvenil", 24, "portero");
+        Jugador jacobo = new Jugador("Jacobo", 82, "juvenil", 23, "portero");
         System.out.println(jacobo);
 
         Entrenador iris = new Entrenador("Iris", 22, "JUVENIL", "3-5-2");
@@ -18,7 +18,7 @@ public class AppFcBarcelona {
         System.out.println(david);
 
         Jugador.mostrarListaJugadores();
-
+        jacobo.viajar("madrid");
         AppMantenimiento.main();
     }
 }

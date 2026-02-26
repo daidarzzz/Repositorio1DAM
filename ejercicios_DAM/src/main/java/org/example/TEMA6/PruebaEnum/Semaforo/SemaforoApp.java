@@ -12,6 +12,9 @@ public class SemaforoApp {
 
         }
 
+        for (Semaforo color : Semaforo.values()) {
+            System.out.println("Color: " + color);
+        }
     }
 
 }

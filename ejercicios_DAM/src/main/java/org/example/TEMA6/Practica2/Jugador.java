@@ -13,15 +13,23 @@ public class Jugador extends BarcelonaFC implements AccionesDeportivas{
     public Jugador(String nombre, int edad, String categoria, Integer dorsal, String posicion) {
         super(nombre, edad);
         this.categoria = Equipos.valueOf(categoria.toUpperCase());
-        this.dorsal = dorsal;
         this.posicion = Posiciones.valueOf(posicion.toUpperCase());
         setDorsal(dorsal);
     }
 
     public static void mostrarListaJugadores() {
         System.out.println("JUGADORES:");
+        int contadorJugadores = 1;
         for (Jugador jugador : listaJugadores) {
-            System.out.println("- " + jugador);
+            System.out.println("[" + contadorJugadores++ + "]. " + jugador);
+        }
+    }
+
+    public static void mostrarListaJugadores(Equipos equipos) {
+        System.out.println("JUGADORES:");
+        int contadorJugadores = 1;
+        for (Jugador jugador : listaJugadores) {
+            if (jugador.getCategoria().equals(equipos)) System.out.println("[" + contadorJugadores++ + "]. " + jugador);
         }
     }
 
@@ -64,19 +72,19 @@ public class Jugador extends BarcelonaFC implements AccionesDeportivas{
                 crearJugador = false;
             }
             for (Jugador jugador : listaJugadores) {
-                if (jugador == this) break;
-                if (jugador.getCategoria() == this.categoria && jugador.getDorsal() == this.dorsal) {
+                if (jugador == this) continue;
+                if (jugador.getCategoria() == this.categoria && jugador.getDorsal() == dorsal) {
                     throw new DorsalExistente("Ya hay un jugador de la categoría " + categoria + " con ese dorsal");
-                } else {
-                    this.dorsal = dorsal;
                 }
             }
+            this.dorsal = dorsal;
         } catch (DorsalExistente e) {
             System.out.println(e.getMessage());
-            this.dorsal = null;
             crearJugador = false;
         }
-        if (crearJugador) listaJugadores.add(this);
+        if (crearJugador && !listaJugadores.contains(this)) {
+            listaJugadores.add(this);
+        }
 
     }
 
@@ -101,12 +109,12 @@ public class Jugador extends BarcelonaFC implements AccionesDeportivas{
 
     @Override
     public void concentrarse() {
-        throw new DorsalExistente("No puedes tener más de un jugador con el mismo dorsal");
+        System.out.println("El jugador " + nombre + " está muy concentrado");
     }
 
     @Override
     public void viajar(String ciudad) {
-        System.out.println("El jugador " + nombre + " va a viajar con el equipo a " + ciudad);
+        System.out.println("El jugador " + nombre + " va a viajar con el equipo " + categoria + " a " + ciudad);
     }
 
     @Override
