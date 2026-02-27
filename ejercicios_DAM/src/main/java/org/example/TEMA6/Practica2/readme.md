@@ -178,7 +178,7 @@ enum Posiciones {
 
 @enduml
 ```
-
+````
 #### Contenido de las clases (java)
 
 - Clase abstracta **BarcelonaFC.java**
@@ -270,6 +270,7 @@ public abstract class BarcelonaFC implements FuncionesIntegrantes{
                 '}';
     }
 }
+
 ````
 
 - Clase **Jugador.java**
