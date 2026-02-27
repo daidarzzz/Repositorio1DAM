@@ -11,96 +11,15 @@
 
 ### 1. Introducción
 
-![img.png](img.png)
+La práctica va de realizar una aplicación para gestionar a las personas que hay dentro de un club, en este caso, el FC Barcelona.  La aplicación nos permite crear jugadores, masajistas, acompañantes de los jugadores y entrenadores de equipos. El club cuenta con categorías específicas y los jugadores juegan en posiciones concretas (Ambos son enum).  BarcelonaFC utiliza la interfaz FuncionesIntegradas, que heredan todas sus hijas. Jugador y entrenador utilizan además la interfaz AccionesDeportivas. El sistema debe de validar que el dorsal de los jugadores no se repita entre categorías, y que los entrenadores tengan formaciones con el formato correcto (N-N-N). 
 
 
 
 ### 2. Estructura de clases
 #### Diagrama de clases UML
-![](./IMG/diagrama.png)
+
 #### Código de PlantUML
-````
-@startuml
 
-' Clase abstracta MetodoPago
-abstract class MetodoPago {
-    + {abstract} procesarPago(importe: double): void
-}
-
-' Clase Tarjeta
-class Tarjeta {
-    - {static} tiposTarjeta: String[]
-    - nro_tarjeta: String
-    - tipo: String
-    + Tarjeta(nro_tarjeta: String, tipo: String)
-    + procesarPago(importe: double): void
-    + validarTarjeta(): boolean
-    + getNro_tarjeta(): String
-    + setNro_tarjeta(nro_tarjeta: String): void
-    + getTipo(): String
-    + setTipo(tipo: String): void
-}
-
-' Clase Paypal
-class Paypal {
-    - cuenta: String
-    - saldo: double
-    + Paypal(cuenta: String)
-    + procesarPago(importe: double): void
-    + validarPaypal(): boolean
-    + saldoSuficiente(importe: double): boolean
-    + getCuenta(): String
-    + setCuenta(cuenta: String): void
-    + getSaldo(): double
-    + setSaldo(saldo: double): void
-}
-
-' Clase Bizum
-class Bizum {
-    - {static} aleatorio: Random
-    - telefono: String
-    - pin: int
-    + Bizum(telefono: String)
-    - generarPin(): void
-    + procesarPago(importe: double): void
-    + validarBizum(pin: int): boolean
-    + getTelefono(): String
-    + setTelefono(telefono: String): void
-    + getPin(): int
-    + setPin(pin: int): void
-}
-
-' Clase Tienda
-class Tienda {
-    + {static} read: Scanner
-    + {static} iniciarPago(): void
-    + {static} realizarPago(metodo: MetodoPago): void
-    - {static} switchMetodos(metodo: String): void
-}
-
-' Clase AppEcommerce
-class AppEcommerce {
-    + {static} main(args: String[]): void
-}
-
-' ─── HERENCIA ───
-MetodoPago <|-- Tarjeta
-MetodoPago <|-- Paypal
-MetodoPago <|-- Bizum
-
-' ─── DEPENDENCIA: Tienda crea 0..1 de cada método ───
-Tienda "1" ..> "0..1" Tarjeta   : <<create>>
-Tienda "1" ..> "0..1" Paypal    : <<create>>
-Tienda "1" ..> "0..1" Bizum     : <<create>>
-
-' ─── USO POLIMÓRFICO: realizarPago recibe MetodoPago ───
-Tienda "1" ..> "1" MetodoPago   : <<use>>
-
-' ─── AppEcommerce inicia Tienda ───
-AppEcommerce "1" ..> "1" Tienda : <<use>>
-
-@enduml
-````
 #### Contenido de las clases (java)
 
 - Clase abstracta **BarcelonaFC.java**
