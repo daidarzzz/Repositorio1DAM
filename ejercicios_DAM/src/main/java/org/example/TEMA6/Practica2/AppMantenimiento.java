@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AppMantenimiento {
     static Scanner read = new Scanner(System.in);
-    static String[] categoriasDisponibles = {"BENJAMIN", "ALEVIN", "INFANTIL", "CADETE", "JUVENIL", "SENIOR"};
+    static Equipos[] categoriasDisponibles = Equipos.values();
     static void main() {
         boolean seguir = true;
         do {
@@ -65,7 +65,7 @@ public class AppMantenimiento {
         System.out.println("[1]. Añadir nuevo jugador");
         System.out.println("[2]. Modificar datos de jugador");
         System.out.println("[3]. Crear acompañantes (sólo seniors)");
-        System.out.println("[X]. Volver al menú principales");
+        System.out.println("[X]. Volver al menú principal");
 
         System.out.println();
         System.out.print("Selecciona una opción --> ");
@@ -100,19 +100,33 @@ public class AppMantenimiento {
                 break;
             case '3':
                 System.out.println(" === MANTENIMIENTO DE JUGADORES (Crear Acompañante (Sólo senior) ===");
-                System.out.print("Introduce el nombre del acompañante: ");
-                String nombre = read.next();
-                System.out.print("Introduce su edad: ");
-                int edad = read.nextInt();
-                System.out.println("Selecciona el jugador al que quiera acompañar:");
-                Jugador.mostrarListaJugadores(Equipos.SENIOR);
-                System.out.print("Selecciona una opción --> ");
-                int opcionJugador = read.nextInt() -1;
-                read.nextLine();
-                System.out.print("Introduce el parentesco: ");
-                String parentesco = read.nextLine();
-                Acompanyante acompanyante = new Acompanyante(nombre, edad, Jugador.listaJugadores.get(opcionJugador), parentesco);
-                System.out.println("Acompañante creado con éxito!!!");
+                boolean haySeniors = false;
+                for (BarcelonaFC senior : BarcelonaFC.listaPersonas) {
+                    if (senior instanceof Jugador) {
+                        if (((Jugador) senior).getCategoria().equals(Equipos.SENIOR)) {
+                            haySeniors = true;
+                            break;
+                        }
+                    }
+                }
+                if (haySeniors) {
+                    System.out.print("Introduce el nombre del acompañante: ");
+                    String nombre = read.next();
+                    System.out.print("Introduce su edad: ");
+                    int edad = read.nextInt();
+                    System.out.println("Selecciona el jugador al que quiera acompañar:");
+                    Jugador.mostrarListaJugadores(Equipos.SENIOR);
+                    System.out.print("Selecciona una opción --> ");
+                    int opcionJugador = read.nextInt() -1;
+                    read.nextLine();
+                    System.out.print("Introduce el parentesco: ");
+                    String parentesco = read.nextLine();
+                    Acompanyante acompanyante = new Acompanyante(nombre, edad, Jugador.listaJugadores.get(opcionJugador), parentesco);
+                    System.out.println("Acompañante creado con éxito!!!");
+                } else {
+                    System.out.println("No puedes crear un acompañante porque no hay ningún senior en el club.");
+                }
+
                 break;
             case 'x':
             case 'X':
@@ -124,7 +138,12 @@ public class AppMantenimiento {
     public static void modificarJugadorSwitch(String opcion, Jugador jugador) {
 
         switch (opcion.toLowerCase()) {
-
+            case "nombre":
+                System.out.print("Nuevo nombre -->");
+                String nombre = read.next();
+                jugador.setNombre(nombre);
+                System.out.println("Nombre cambiado con éxito!!!");
+                break;
             case "dorsal":
                 System.out.print("Nuevo dorsal -->");
                 int dorsal = read.nextInt();
@@ -132,7 +151,34 @@ public class AppMantenimiento {
                 jugador.setDorsal(dorsal);
                 if (dorsalAntiguo != jugador.getDorsal()) System.out.println("Dorsal cambiado con éxito!!!");
                 break;
-
+            case "edad":
+                System.out.print("Nueva edad -->");
+                int edad = read.nextInt();
+                jugador.setEdad(edad);
+                System.out.println("Edad cambiada con éxito!!!");
+                break;
+            case "categoria":
+                System.out.print("Nueva categoría -->");
+                String categoria = read.next();
+                try {
+                    jugador.setCategoria(Equipos.valueOf(categoria));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Has introducido un equipo no contemplado");
+                    break;
+                }
+                System.out.println("Categoría cambiada con éxito!!!");
+                break;
+            case "posicion":
+                System.out.print("Nueva posición -->");
+                String posicion = read.next();
+                try {
+                    jugador.setCategoria(Equipos.valueOf(posicion));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Has introducido una posición no contemplada");
+                    break;
+                }
+                System.out.println("Posición cambiada con éxito!!!");
+                break;
         }
 
     }
