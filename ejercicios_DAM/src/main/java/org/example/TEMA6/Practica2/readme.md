@@ -17,8 +17,167 @@ La práctica va de realizar una aplicación para gestionar a las personas que ha
 
 ### 2. Estructura de clases
 #### Diagrama de clases UML
-
+![](./IMG/diagrama.png)
 #### Código de PlantUML
+````
+@startuml
+skinparam classAttributeIconSize 0
+
+' =========================
+' INTERFACES
+' =========================
+
+interface FuncionesIntegrantes {
+    +concentrarse() : void
+    +viajar(ciudad : String) : void
+    +celebrarGol() : void
+}
+
+interface AccionesDeportivas {
+    +entrenar() : void
+    +jugarPartido(rival : String) : void
+}
+
+' =========================
+' CLASE ABSTRACTA BASE
+' =========================
+
+abstract class BarcelonaFC {
+    #nombre : String
+    #edad : int
+    #listaPersonas : ArrayList<BarcelonaFC>
+}
+
+BarcelonaFC ..|> FuncionesIntegrantes
+
+' =========================
+' JUGADOR
+' =========================
+
+class Jugador {
+    -categoria : Equipos
+    -dorsal : Integer
+    -posicion : Posiciones
+    -listaJugadores : ArrayList<Jugador>
+    --
+    +calentar() : void
+    +descansar() : void
+    +marcarGol() : void
+    +entrenar() : void
+    +jugarPartido(rival : String) : void
+    +mostrarListaJugadores() : void
+}
+
+Jugador --|> BarcelonaFC
+Jugador ..|> AccionesDeportivas
+
+' =========================
+' ENTRENADOR
+' =========================
+
+class Entrenador {
+    -equipo : Equipos
+    -formacionPreferida : String
+    --
+    +planificarEntrenamiento() : void
+    +hacerCambios() : void
+    +entrenar() : void
+    +jugarPartido(rival : String) : void
+}
+
+Entrenador --|> BarcelonaFC
+Entrenador ..|> AccionesDeportivas
+
+' =========================
+' MASAJISTA
+' =========================
+
+class Masajista {
+    -titulacion : String
+    -anosExperiencia : int
+    --
+    +darMasaje(jugador : Jugador) : void
+}
+
+Masajista --|> BarcelonaFC
+Masajista --> Jugador
+
+' =========================
+' ACOMPANYANTE
+' =========================
+
+class Acompanyante {
+    -integrante : Jugador
+    -parentesco : String
+    --
+    +animarEquipo() : void
+}
+
+Acompanyante --|> BarcelonaFC
+Acompanyante --> Jugador
+
+' =========================
+' EXCEPCIONES
+' =========================
+
+class DorsalExistente
+class FormatoIncorrecto
+
+DorsalExistente --|> RuntimeException
+FormatoIncorrecto --|> RuntimeException
+
+Jugador ..> DorsalExistente
+Entrenador ..> FormatoIncorrecto
+
+' =========================
+' APPS
+' =========================
+
+class AppFcBarcelona {
+    +main(args : String[]) : void
+}
+
+class AppMantenimiento {
+    -read : Scanner
+    -categoriasDisponibles : Equipos[]
+    --
+    +main() : void
+    +menu() : void
+    +switchMenu(opcion : char) : boolean
+    +mantenerJugador() : void
+    +modificarJugadorSwitch(opcion : String, jugador : Jugador) : void
+}
+
+AppFcBarcelona ..> Jugador
+AppFcBarcelona ..> Entrenador
+AppFcBarcelona ..> Masajista
+AppFcBarcelona ..> Acompanyante
+
+AppMantenimiento ..> Jugador
+AppMantenimiento ..> Acompanyante
+
+' =========================
+' ENUMS (SIN RELACIONES)
+' =========================
+
+enum Equipos {
+    BENJAMIN
+    ALEVIN
+    INFANTIL
+    CADETE
+    JUVENIL
+    SENIOR
+}
+
+enum Posiciones {
+    PORTERO
+    DEFENSA
+    CENTROCAMPISTA
+    DELANTERO
+}
+
+@enduml
+```
 
 #### Contenido de las clases (java)
 
