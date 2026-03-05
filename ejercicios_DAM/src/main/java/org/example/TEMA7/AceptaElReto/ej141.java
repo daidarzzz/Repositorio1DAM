@@ -32,19 +32,15 @@ public class ej141 {
 
                 Stack<Character> pila = new Stack<>();
 
-                boolean par1 = false;
-                boolean par2 = false;
                 for (int i = 0; i < lista.size() ; i++) {
                     Character character = lista.get(i);
                     if (Arrays.asList(valoresEntrar).contains(character)) {
                         pila.push(character);
-                        par1 = true;
                     } else if (Arrays.asList(valoresCerrar).contains(character)) {
-                            par2 = true;
+
                             int valor = Arrays.asList(valoresCerrar).indexOf(character);
 
                             if (!pila.isEmpty() && pila.peek() == valoresEntrar[valor]) {
-                                correcto = true;
                                 pila.pop();
                             } else {
                                 correcto = false;
@@ -52,9 +48,8 @@ public class ej141 {
                     }
                 }
 
+                if (!pila.isEmpty()) correcto = false;
 
-                if (par1 && par2) correcto = true;
-                else correcto = false;
                 if (correcto) System.out.println("YES");
                 else System.out.println("NO");
 
