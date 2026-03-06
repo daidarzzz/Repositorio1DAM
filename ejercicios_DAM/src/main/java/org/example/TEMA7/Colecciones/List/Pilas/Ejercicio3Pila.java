@@ -1,4 +1,4 @@
-package org.example.TEMA7.Colecciones.Pilas;
+package org.example.TEMA7.Colecciones.List.Pilas;
 
 import java.util.Stack;
 
