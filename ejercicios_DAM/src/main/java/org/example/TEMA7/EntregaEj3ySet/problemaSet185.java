@@ -45,7 +45,7 @@ public class problemaSet185 {
             for (String malosos : malos) {
                 if (!buenos.contains(malosos)) {
                     if (!primero) {
-                        System.out.print(" "); // El espacio se pone ANTES de la palabra, si no es la primera
+                        System.out.print(" "); 
                     }
                     System.out.print(malosos);
                     primero = false;
