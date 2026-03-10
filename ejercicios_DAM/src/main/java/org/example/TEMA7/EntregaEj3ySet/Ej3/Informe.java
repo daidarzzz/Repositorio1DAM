@@ -1,7 +1,5 @@
 package org.example.TEMA7.EntregaEj3ySet.Ej3;
 
-import org.example.TEMA6.Practica2.Posiciones;
-
 import java.util.Objects;
 
 public class Informe {

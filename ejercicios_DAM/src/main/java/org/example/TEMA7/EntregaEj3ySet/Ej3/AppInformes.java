@@ -1,5 +1,6 @@
 package org.example.TEMA7.EntregaEj3ySet.Ej3;
 
+import java.util.HashSet;
 import java.util.Stack;
 
 public class AppInformes {
@@ -21,11 +22,27 @@ public class AppInformes {
 
         }
 
+
+        System.out.println();
+        System.out.println();
+        System.out.println("Nuevas tareas:");
         pila.push(new Informe(10, "tarea11", "ADMINISTRATIVO"));
+        System.out.println(pila.peek());
         pila.push(new Informe(10, "tarea121", "ADMINISTRATIVO"));
+        System.out.println(pila.peek());
         pila.push(new Informe(20, "tarea11214", "EMPRESARIAL"));
+        System.out.println(pila.peek());
 
+        int tareasUnicas = tareasUnicas(pila);
 
+        System.out.println("Hay " + tareasUnicas + " tareas únicas.");
+    }
+
+    public static int tareasUnicas(Stack<Informe> pila) {
+
+        HashSet<Informe> set = new HashSet<>(pila);
+
+        return set.size();
     }
 
 }
