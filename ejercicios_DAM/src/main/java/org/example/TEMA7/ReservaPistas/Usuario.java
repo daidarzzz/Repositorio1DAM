@@ -1,5 +1,7 @@
 package org.example.TEMA7.ReservaPistas;
 
+import java.util.Objects;
+
 public class Usuario {
 
     private static int contadorUsuarios = 1;
@@ -26,6 +28,18 @@ public class Usuario {
 
     public void setId() {
         this.id = contadorUsuarios++;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return id == usuario.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     @Override

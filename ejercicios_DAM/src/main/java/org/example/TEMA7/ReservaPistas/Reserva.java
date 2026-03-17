@@ -1,10 +1,7 @@
 package org.example.TEMA7.ReservaPistas;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Reserva {
 
@@ -18,25 +15,31 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public static void borrarReservas(ArrayList<Reserva> lista, String tipo) {
+    public static void borrarReservas(Map<Usuario, ArrayList<Reserva>> mapa, String tipo) {
 
-        Iterator<Reserva> it = lista.iterator();
-        while (it.hasNext()) {
-            Reserva reserva = it.next();
-            if (tipo.equalsIgnoreCase("padel") && reserva.getPista() instanceof Padel) {
-                it.remove();
+        for (Map.Entry<Usuario, ArrayList<Reserva>> mapita : mapa.entrySet()) {
+            Iterator<Reserva> it = mapita.getValue().iterator();
+            while (it.hasNext()) {
+                Reserva reserva = it.next();
+                if (tipo.equalsIgnoreCase("padel") && reserva.getPista() instanceof Padel) {
+                    it.remove();
+                }
+                else if (tipo.equalsIgnoreCase("tenis") && reserva.getPista() instanceof Tenis) {
+                    it.remove();
+                }
             }
-            else if (tipo.equalsIgnoreCase("tenis") && reserva.getPista() instanceof Tenis) {
-                it.remove();
-            }
+
         }
+
 
     }
 
     public static ArrayList reservasUsuario(Usuario usuario, Map<Usuario, ArrayList<Reserva>> mapa) {
-        ArrayList<Reserva> listaReservas = new ArrayList<>();
+        ArrayList<Reserva> listaReservas = mapa.get(usuario);
 
-        listaReservas = mapa.get(usuario);
+        if (listaReservas == null) {
+            listaReservas = new ArrayList<>();
+        }
 
         return listaReservas;
 
@@ -46,6 +49,12 @@ public class Reserva {
     public static void crearReserva(Map<Usuario, ArrayList<Reserva>> mapa, Usuario usuario, Pista pista, LocalDateTime hora) {
         Reserva reserva  = new Reserva(usuario, pista, hora);
         ArrayList<Reserva> lista = reservasUsuario(usuario, mapa);
+        for (Map.Entry<Usuario, ArrayList<Reserva>> mapita : mapa.entrySet()) {
+
+            if (mapita.getValue().contains(reserva)) throw new HoraReservaException("La pista " + pista.getId() + " ya está ocupada a esta hora ( " + hora.toString() + ")");
+
+        }
+
         lista.add(reserva);
         mapa.put(usuario, lista);
     }
