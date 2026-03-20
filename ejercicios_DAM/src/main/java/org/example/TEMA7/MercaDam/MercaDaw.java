@@ -16,7 +16,7 @@ public class MercaDaw {
     public
 
 
-    public Set<Cliente> getClientes() {
+    Set<Cliente> getClientes() {
         return Collections.unmodifiableSet(clientes);
     }
 
