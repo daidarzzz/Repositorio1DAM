@@ -20,7 +20,7 @@ public class Bus {
             limpiarPantalla();
 
 
-            numAleatorio = numAleatorio = aleatorio.nextInt(0,10);
+            numAleatorio = numAleatorio = aleatorio.nextInt(0,3);
             if (numAleatorio == 6)  a++; // avanzamos
             else if (numAleatorio == 3) b++;
             else if (numAleatorio == 5) c++;
