@@ -20,11 +20,11 @@ public class Bus {
             limpiarPantalla();
 
 
-            numAleatorio = numAleatorio = aleatorio.nextInt(0,3);
-            if (numAleatorio == 6)  a++; // avanzamos
-            else if (numAleatorio == 3) b++;
-            else if (numAleatorio == 5) c++;
-            else if (numAleatorio == 9) d++;
+            numAleatorio = numAleatorio = aleatorio.nextInt(0,4);
+            if (numAleatorio == 0)  a++; // avanzamos
+            else if (numAleatorio == 1) b++;
+            else if (numAleatorio == 2) c++;
+            else if (numAleatorio == 3) d++;
 
 
             System.out.println(dibujarCarrera(a, b, c, d));
