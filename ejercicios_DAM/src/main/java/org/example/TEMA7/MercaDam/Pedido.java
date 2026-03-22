@@ -4,20 +4,22 @@ import java.util.HashMap;
 
 public class Pedido {
 
-    private HashMap<Producto, Integer> pedido;
+
+    private HashMap<Producto, Integer> productos;
     private double importeTotal;
 
     public Pedido() {
-
+        this.productos = new HashMap<>();
+        this.importeTotal = 0;
     }
 
     public Pedido(HashMap<Producto, Integer> pedido, double importeTotal) {
-        this.pedido = pedido;
+        this.productos = pedido;
         this.importeTotal = importeTotal;
     }
 
     public void actualizarImporteTotal(double importeTotal) {
-
+        this.importeTotal += importeTotal;
     }
 
     public void aplicarPromo3x2() {
@@ -28,12 +30,24 @@ public class Pedido {
         
     }
 
-    public HashMap<Producto, Integer> getPedido() {
-        return pedido;
+    public void insertarProducto(Producto producto) {
+
+        int cantidad = 0;
+        if (!productos.containsKey(producto)) this.productos.put(producto, 1);
+        else {
+            cantidad = productos.get(producto);
+
+            productos.put(producto, cantidad + 1);
+        }
+
     }
 
-    public void setPedido(HashMap<Producto, Integer> pedido) {
-        this.pedido = pedido;
+    public HashMap<Producto, Integer> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(HashMap<Producto, Integer> productos) {
+        this.productos = productos;
     }
 
     public double getImporteTotal() {
