@@ -2,6 +2,11 @@ package org.example.TEMA7.MercaDam;
 
 import java.util.Objects;
 
+/**
+ * Clase que representa a un cliente que compra en la aplicación de MERCADAM
+ * Contiene atributos básicos como su usario, contraseña, direccion, el pedido y
+ * si tiene promociones activas
+ */
 public class Cliente {
 
     private String usuario;
@@ -10,6 +15,13 @@ public class Cliente {
     private Pedido pedido;
     private boolean promociones;
 
+    /**
+     *
+     * Constructor que recibe el usuario y la contraseña como parámetro,
+     * con una dirección por defecto, y las promociones en false.
+     * @param usuario nombre de usuario de 8 caracteres
+     * @param contrasenya contraseña de 8 caracteres
+     */
     public Cliente(String usuario, String contrasenya) {
         this.usuario = usuario;
         this.contrasenya = contrasenya;
@@ -18,10 +30,19 @@ public class Cliente {
         this.direccion = "Calle falsa, 123";
     }
 
+    /**
+     * Inicializa el pedido, que empieza siendo null en el constructor
+     */
     public void crearPedido() {
         pedido = new Pedido();
     }
 
+    /**
+     * Método que sirve para añadir un producto al carrito
+     * Si el pedido no tiene ese producto aún, se inicializa la cantidad en 1.
+     * En caso contrario, recogemos la cantidad y la aumentamos en uno.
+     * @param producto el producto que se va a insertar al mapa
+     */
     public void insertarProducto(Producto producto){
 
         int cantidad = 0;
@@ -34,6 +55,9 @@ public class Cliente {
 
     }
 
+    /**
+     * GETTER Y SETTER BÁSICOS
+     */
     public String getUsuario() {
         return usuario;
     }
@@ -82,6 +106,11 @@ public class Cliente {
                 '}';
     }
 
+    /**
+     * Método equals que comprueba que un objeto sea igual a otro
+     * @param o   the reference object with which to compare.
+     * @return Devuelve true si son iguales, false si son distintos
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -89,6 +118,9 @@ public class Cliente {
         return Objects.equals(usuario, cliente.usuario) && Objects.equals(contrasenya, cliente.contrasenya);
     }
 
+    /**
+     * @return Método que devuelve el hash de un objeto
+     */
     @Override
     public int hashCode() {
         return Objects.hash(usuario, contrasenya);

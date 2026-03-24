@@ -1,16 +1,23 @@
 package org.example.TEMA7.MercaDam;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.sql.SQLOutput;
+import java.util.*;
 
+/**
+ * Clase principal donde vamos a usar las demás clases y ejecutar sus métodos y métodos propios de esta clase
+ */
 public class AppZonaClientes {
 
     static Cliente cliente;
     static Scanner read = new Scanner(System.in);
 
+    /**
+     * Método donde se ejecuta el programa principal, en este creamos el supermercado,
+     * los clientes, realizamos un login y comenzamos la compra.
+     * @param args
+     */
     static void main(String[] args) {
+
 
         MercaDam mercaDam = new MercaDam();
 
@@ -25,6 +32,16 @@ public class AppZonaClientes {
 
     }
 
+    /**
+     * Método que sirve para logearte correctamente.
+     * Tienes 3 intentos, en caso de que falles esas 3 veces el
+     * usuario o contraseña, se acaba el programa (devolviendo false),
+     * en caso contrario, el cliente "tonto" generado previamente,
+     * se le será asignada la dirección de memoria de la cuenta a la que
+     * inicio sesión
+     * @param clientes
+     * @return
+     */
     public static boolean autenticacion(Set<Cliente> clientes) {
         System.out.println("=== COMPRA ONLINE EN MERCADAM ===");
         int intentos = 3;
@@ -52,6 +69,9 @@ public class AppZonaClientes {
         else return true;
     }
 
+    /**
+     * Método que crea sirve para llamar a otros métodos (crear pedido e imprimir los productos disponibles)
+     */
     public static void iniciarCompra() {
         cliente.crearPedido();
         System.out.println("Bienvenido, " + cliente.getUsuario());
@@ -59,6 +79,12 @@ public class AppZonaClientes {
         imprimirProductos();
     }
 
+    /**
+     * Método que te imprime los productos disponibles en la lista y te deja elegir los que añadir
+     * al carrito de la compra, añade productos hasta que el usuario introduzca un carácter que no
+     * sea 's'. Al dejar de añadir productos, te mostrará el resumen del pedido, y llamará al método de
+     * mostrarOpciones.
+     */
     public static void imprimirProductos() {
         System.out.println("Elige un producto de la lista...");
         for (Producto producto : Producto.values()) {
@@ -93,6 +119,12 @@ public class AppZonaClientes {
 
     }
 
+    /**
+     * Método que te muestra un resumen del pedido actual.
+     * Utiliza un foreach de un Map.Entry (que te permite usar clave y valor),
+     * en cada iteración se imprime un producto del carrito, el precio y la cantidad del producto
+     * al final se imprime el importe total del pedido.
+     */
     public static void imprimirResumen() {
         System.out.println("=== RESUMEN DE TU CARRITO DE LA COMPRA ===");
         System.out.println("Productos: ");
@@ -102,20 +134,69 @@ public class AppZonaClientes {
         System.out.println("Importe total: " + cliente.getPedido().getImporteTotal() + "€");
     }
 
+    /**
+     * Método que imprime el mismo resumen pero este está ordenado por cantidad
+     * del producto. Se crea una lista de Map.Entry, que se inicializa como un ArrayList.
+     * Mediante Comparator, realizamos un Collections.sort, e indicamos que clase va a realizar
+     * la ordenación. Después de ordenar la lista, la procedemos a imprimir mediante un foreach
+     */
     public static void imprimirResumenOrdenado() {
         System.out.println("=== RESUMEN DE TU CARRITO DE LA COMPRA ===");
         System.out.println("Productos: ");
-        for (Map.Entry<Producto, Integer> mapita : cliente.getPedido().getProductos().entrySet()) {
+
+        List<Map.Entry<Producto, Integer>> lista = new ArrayList<>(cliente.getPedido().getProductos().entrySet());
+
+        Collections.sort(lista, new OrdenadoPorUnidades().reversed());
+
+        for (Map.Entry<Producto, Integer> mapita : lista) {
             System.out.println(mapita.getValue() + " " + mapita.getKey() + " " + mapita.getKey().getPrecio());
         }
+
         System.out.println("Importe total: " + cliente.getPedido().getImporteTotal() + "€");
     }
 
+    /**
+     * Método que se despide
+     */
     public static void imprimirDespedida() {
         System.out.println("=== GRACIAS POR SU PEDIDO ===");
         System.out.println("Lo recibirá en unos días en la dirección " + cliente.getDireccion());
     }
 
+    /**
+     *
+     */
+    public static void borrarProducto() {
+        imprimirResumen();
+        System.out.println("=== BORRAR PRODUCTO ===");
+        System.out.println("Introduce el producto que deseas borrar (1 unidad): ");
+        try {
+            Producto producto = Producto.valueOf(read.next().toUpperCase());
+            if (!cliente.getPedido().getProductos().containsKey(producto)) {
+                throw new IllegalArgumentException();
+            }
+
+            if (cliente.getPedido().getProductos().get(producto) == 1) {
+                cliente.getPedido().getProductos().remove(producto);
+            } else {
+
+                int cantidad = cliente.getPedido().getProductos().get(producto);
+                cliente.getPedido().getProductos().put(producto, cantidad-1);
+
+
+            }
+
+            cliente.getPedido().setImporteTotal(cliente.getPedido().getImporteTotal() - producto.getPrecio());
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("El producto escogido no se encuentra en el carrito de la compra.");
+        }
+    }
+
+    /**
+     * Método que te muestra las opciones que puedes hacer con tu pedido, cada
+     * opción llamará a un método distinto que realizará la acción.
+     */
     public static void mostrarOpciones() {
         int opcion = 0;
         do {
@@ -132,13 +213,29 @@ public class AppZonaClientes {
 
             switch (opcion) {
                 case 1:
-                    cliente.getPedido().aplicarPromo3x2();
-                    cliente.getPedido().aplicarPromo10();
+                    if (cliente.isPromociones()) {
+                        System.out.println("Este cliente ya tiene promociones.");
+                    } else {
+                        cliente.getPedido().aplicarPromo3x2();
+                        cliente.getPedido().aplicarPromo10();
+                        cliente.setPromociones(true);
+
+
+                        System.out.println("=========================================");
+                        System.out.println("PROMO 3X2 y 10% DESC. APLICADAS");
+                        System.out.println("=========================================");
+
+                        imprimirResumen();
+
+                    }
+
+
                     break;
                 case 2:
                     imprimirResumenOrdenado();
                     break;
                 case 3:
+                    borrarProducto();
                     break;
                 case 4:
                     imprimirDespedida();
@@ -148,7 +245,7 @@ public class AppZonaClientes {
                     break;
 
             }
-        } while (opcion != 3);
+        } while (opcion != 4);
     }
 
 }
