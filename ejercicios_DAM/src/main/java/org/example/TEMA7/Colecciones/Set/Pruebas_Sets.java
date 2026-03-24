@@ -13,7 +13,7 @@ public class Pruebas_Sets {
         TreeSet<String> ordenada = new TreeSet<>(Arrays.asList(esquiroles));
 
         System.out.println(normal);
-        System.out.println(respetaAdd);
+        System.out.println(respetaAdd); //Respeta el orden de añadidos
         System.out.println(ordenada);
 
 
