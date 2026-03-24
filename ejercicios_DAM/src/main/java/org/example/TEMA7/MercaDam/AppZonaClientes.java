@@ -65,7 +65,6 @@ public class AppZonaClientes {
             System.out.println(producto + ": " + producto.getPrecio() + "€");
         }
         System.out.println("=====================================================");
-        boolean productoCorrecto = false;
         char seguir = 'S';
         do {
             System.out.println("Elige un producto: ");
@@ -73,9 +72,7 @@ public class AppZonaClientes {
             System.out.println();
             try {
                 Producto producto = Producto.valueOf(opcion);
-
-                productoCorrecto = true;
-                cliente.getPedido().insertarProducto(producto);
+                cliente.insertarProducto(producto);
                 System.out.println("Has añadido " + producto + " con un precio de " + producto.getPrecio() + "€");
                 cliente.getPedido().actualizarImporteTotal(producto.getPrecio());
 

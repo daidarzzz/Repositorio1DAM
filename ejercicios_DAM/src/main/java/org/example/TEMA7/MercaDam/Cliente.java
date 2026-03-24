@@ -24,6 +24,14 @@ public class Cliente {
 
     public void insertarProducto(Producto producto){
 
+        int cantidad = 0;
+        if (!this.pedido.productos.containsKey(producto)) this.pedido.productos.put(producto, 1);
+        else {
+            cantidad = pedido.productos.get(producto);
+
+            pedido.productos.put(producto, cantidad + 1);
+        }
+
     }
 
     public String getUsuario() {
