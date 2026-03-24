@@ -124,7 +124,8 @@ public class AppZonaClientes {
             System.out.println("¿Qué desea hacer?");
             System.out.println("[1]. Aplicar promos.");
             System.out.println("[2]. Mostrar resumen ordenado por uds.");
-            System.out.println("[3]. Terminar pedido.");
+            System.out.println("[3]. Borrar producto de la lista.");
+            System.out.println("[4]. Terminar pedido.");
 
             System.out.println("Selecciona una opción:");
             opcion = read.nextInt();
@@ -138,6 +139,8 @@ public class AppZonaClientes {
                     imprimirResumenOrdenado();
                     break;
                 case 3:
+                    break;
+                case 4:
                     imprimirDespedida();
                     break;
                 default:
