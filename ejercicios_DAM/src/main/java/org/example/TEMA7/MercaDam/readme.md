@@ -1,4 +1,4 @@
-# Práctica 2 - App del FC BARCELONA
+# Práctica FINAL - App de MercaDam
 
 ## Índice de contenido
 1. [Introducción](#introducción)
