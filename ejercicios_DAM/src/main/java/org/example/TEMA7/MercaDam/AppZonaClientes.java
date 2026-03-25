@@ -164,7 +164,10 @@ public class AppZonaClientes {
     }
 
     /**
-     *
+     *Este método sirve para borrar un producto del carrito de la compra, introduces cual producto quieres borrar, y
+     * en caso de que el producto no esté en el carrito o no exista, te lo dirá. En caso de que quieras borrar un producto
+     * que tiene una unidad, hará un remove, borrando el producto, en caso de que tenga más de una unidad, restará en uno
+     * la cantidad del producto.
      */
     public static void borrarProducto() {
         imprimirResumen();
